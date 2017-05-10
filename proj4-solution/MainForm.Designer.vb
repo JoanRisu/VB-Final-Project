@@ -22,9 +22,29 @@ Partial Class MainForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        components = New System.ComponentModel.Container()
+        Me.exitButton = New System.Windows.Forms.Button()
+        Me.SuspendLayout()
+        '
+        'exitButton
+        '
+        Me.exitButton.Location = New System.Drawing.Point(238, 67)
+        Me.exitButton.Name = "exitButton"
+        Me.exitButton.Size = New System.Drawing.Size(75, 23)
+        Me.exitButton.TabIndex = 0
+        Me.exitButton.Text = "E&xit"
+        Me.exitButton.UseVisualStyleBackColor = True
+        '
+        'MainForm
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(337, 261)
+        Me.Controls.Add(Me.exitButton)
+        Me.Name = "MainForm"
         Me.Text = "Form1"
+        Me.ResumeLayout(False)
+
     End Sub
 
+    Friend WithEvents exitButton As Button
 End Class

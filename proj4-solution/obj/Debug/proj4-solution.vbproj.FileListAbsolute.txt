@@ -1,1 +1,2 @@
 C:\Users\Student\Documents\VB-Final-Project\proj4-solution\bin\Debug\proj4-solution.exe.config
+C:\Users\Joan Risu\Documents\VB-Final-Project\proj4-solution\bin\Debug\proj4-solution.exe.config

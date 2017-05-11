@@ -1,2 +1,12 @@
 C:\Users\Student\Documents\VB-Final-Project\proj4-solution\bin\Debug\proj4-solution.exe.config
 C:\Users\Joan Risu\Documents\VB-Final-Project\proj4-solution\bin\Debug\proj4-solution.exe.config
+C:\Users\Joan Risu\Documents\VB-Final-Project\proj4-solution\bin\Debug\proj4-solution.exe
+C:\Users\Joan Risu\Documents\VB-Final-Project\proj4-solution\bin\Debug\proj4-solution.pdb
+C:\Users\Joan Risu\Documents\VB-Final-Project\proj4-solution\bin\Debug\proj4-solution.xml
+C:\Users\Joan Risu\Documents\VB-Final-Project\proj4-solution\obj\Debug\proj4-solution.vbprojResolveAssemblyReference.cache
+C:\Users\Joan Risu\Documents\VB-Final-Project\proj4-solution\obj\Debug\proj4_solution.MainForm.resources
+C:\Users\Joan Risu\Documents\VB-Final-Project\proj4-solution\obj\Debug\proj4_solution.Resources.resources
+C:\Users\Joan Risu\Documents\VB-Final-Project\proj4-solution\obj\Debug\proj4-solution.vbproj.GenerateResource.Cache
+C:\Users\Joan Risu\Documents\VB-Final-Project\proj4-solution\obj\Debug\proj4-solution.exe
+C:\Users\Joan Risu\Documents\VB-Final-Project\proj4-solution\obj\Debug\proj4-solution.xml
+C:\Users\Joan Risu\Documents\VB-Final-Project\proj4-solution\obj\Debug\proj4-solution.pdb

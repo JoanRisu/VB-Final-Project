@@ -33,8 +33,8 @@ Partial Class MainForm
         Me.orderList = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -42,17 +42,17 @@ Partial Class MainForm
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
-        Me.otherCheckBox = New System.Windows.Forms.CheckBox()
         Me.otherDiscountTextBox = New System.Windows.Forms.TextBox()
+        Me.otherCheckBox = New System.Windows.Forms.CheckBox()
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.totalLabel = New System.Windows.Forms.Label()
+        Me.discountLabel = New System.Windows.Forms.Label()
+        Me.taxLabel = New System.Windows.Forms.Label()
+        Me.subTotalLabel = New System.Windows.Forms.Label()
         Me.loadButton = New System.Windows.Forms.Button()
         Me.saveButton = New System.Windows.Forms.Button()
-        Me.subTotalLabel = New System.Windows.Forms.Label()
-        Me.taxLabel = New System.Windows.Forms.Label()
-        Me.discountLabel = New System.Windows.Forms.Label()
-        Me.totalLabel = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -142,6 +142,11 @@ Partial Class MainForm
         Me.ColumnHeader2.Text = "Item Price"
         Me.ColumnHeader2.Width = 78
         '
+        'ColumnHeader3
+        '
+        Me.ColumnHeader3.Text = "Quantity"
+        Me.ColumnHeader3.Width = 61
+        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -150,11 +155,6 @@ Partial Class MainForm
         Me.Label1.Size = New System.Drawing.Size(49, 13)
         Me.Label1.TabIndex = 6
         Me.Label1.Text = "Subtotal:"
-        '
-        'ColumnHeader3
-        '
-        Me.ColumnHeader3.Text = "Quantity"
-        Me.ColumnHeader3.Width = 61
         '
         'Label2
         '
@@ -223,6 +223,44 @@ Partial Class MainForm
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Discounts"
         '
+        'otherDiscountTextBox
+        '
+        Me.otherDiscountTextBox.Location = New System.Drawing.Point(6, 87)
+        Me.otherDiscountTextBox.Name = "otherDiscountTextBox"
+        Me.otherDiscountTextBox.ReadOnly = True
+        Me.otherDiscountTextBox.Size = New System.Drawing.Size(100, 20)
+        Me.otherDiscountTextBox.TabIndex = 10
+        '
+        'otherCheckBox
+        '
+        Me.otherCheckBox.AutoSize = True
+        Me.otherCheckBox.Location = New System.Drawing.Point(7, 68)
+        Me.otherCheckBox.Name = "otherCheckBox"
+        Me.otherCheckBox.Size = New System.Drawing.Size(52, 17)
+        Me.otherCheckBox.TabIndex = 2
+        Me.otherCheckBox.Text = "Other"
+        Me.otherCheckBox.UseVisualStyleBackColor = True
+        '
+        'CheckBox2
+        '
+        Me.CheckBox2.AutoSize = True
+        Me.CheckBox2.Location = New System.Drawing.Point(7, 44)
+        Me.CheckBox2.Name = "CheckBox2"
+        Me.CheckBox2.Size = New System.Drawing.Size(81, 17)
+        Me.CheckBox2.TabIndex = 1
+        Me.CheckBox2.Text = "CheckBox2"
+        Me.CheckBox2.UseVisualStyleBackColor = True
+        '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(7, 20)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(81, 17)
+        Me.CheckBox1.TabIndex = 0
+        Me.CheckBox1.Text = "CheckBox1"
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        '
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.totalLabel)
@@ -240,43 +278,45 @@ Partial Class MainForm
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Total Sale"
         '
-        'CheckBox1
+        'totalLabel
         '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(7, 20)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(81, 17)
-        Me.CheckBox1.TabIndex = 0
-        Me.CheckBox1.Text = "CheckBox1"
-        Me.CheckBox1.UseVisualStyleBackColor = True
+        Me.totalLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.totalLabel.Location = New System.Drawing.Point(72, 122)
+        Me.totalLabel.Name = "totalLabel"
+        Me.totalLabel.Size = New System.Drawing.Size(100, 23)
+        Me.totalLabel.TabIndex = 7
+        Me.totalLabel.Text = "$0.00"
+        Me.totalLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'CheckBox2
+        'discountLabel
         '
-        Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.Location = New System.Drawing.Point(7, 44)
-        Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(81, 17)
-        Me.CheckBox2.TabIndex = 1
-        Me.CheckBox2.Text = "CheckBox2"
-        Me.CheckBox2.UseVisualStyleBackColor = True
+        Me.discountLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.discountLabel.Location = New System.Drawing.Point(72, 88)
+        Me.discountLabel.Name = "discountLabel"
+        Me.discountLabel.Size = New System.Drawing.Size(100, 23)
+        Me.discountLabel.TabIndex = 7
+        Me.discountLabel.Text = "$0.00"
+        Me.discountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'otherCheckBox
+        'taxLabel
         '
-        Me.otherCheckBox.AutoSize = True
-        Me.otherCheckBox.Location = New System.Drawing.Point(7, 68)
-        Me.otherCheckBox.Name = "otherCheckBox"
-        Me.otherCheckBox.Size = New System.Drawing.Size(52, 17)
-        Me.otherCheckBox.TabIndex = 2
-        Me.otherCheckBox.Text = "Other"
-        Me.otherCheckBox.UseVisualStyleBackColor = True
+        Me.taxLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.taxLabel.Location = New System.Drawing.Point(72, 54)
+        Me.taxLabel.Name = "taxLabel"
+        Me.taxLabel.Size = New System.Drawing.Size(100, 23)
+        Me.taxLabel.TabIndex = 7
+        Me.taxLabel.Text = "$0.00"
+        Me.taxLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'otherDiscountTextBox
+        'subTotalLabel
         '
-        Me.otherDiscountTextBox.Location = New System.Drawing.Point(6, 87)
-        Me.otherDiscountTextBox.Name = "otherDiscountTextBox"
-        Me.otherDiscountTextBox.ReadOnly = True
-        Me.otherDiscountTextBox.Size = New System.Drawing.Size(100, 20)
-        Me.otherDiscountTextBox.TabIndex = 10
+        Me.subTotalLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.subTotalLabel.Location = New System.Drawing.Point(72, 20)
+        Me.subTotalLabel.Name = "subTotalLabel"
+        Me.subTotalLabel.Size = New System.Drawing.Size(100, 23)
+        Me.subTotalLabel.TabIndex = 7
+        Me.subTotalLabel.Text = "$0.00"
+        Me.subTotalLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'loadButton
         '
@@ -295,46 +335,6 @@ Partial Class MainForm
         Me.saveButton.TabIndex = 10
         Me.saveButton.Text = "Save List"
         Me.saveButton.UseVisualStyleBackColor = True
-        '
-        'subTotalLabel
-        '
-        Me.subTotalLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.subTotalLabel.Location = New System.Drawing.Point(72, 20)
-        Me.subTotalLabel.Name = "subTotalLabel"
-        Me.subTotalLabel.Size = New System.Drawing.Size(100, 23)
-        Me.subTotalLabel.TabIndex = 7
-        Me.subTotalLabel.Text = "$0.00"
-        Me.subTotalLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'taxLabel
-        '
-        Me.taxLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.taxLabel.Location = New System.Drawing.Point(72, 54)
-        Me.taxLabel.Name = "taxLabel"
-        Me.taxLabel.Size = New System.Drawing.Size(100, 23)
-        Me.taxLabel.TabIndex = 7
-        Me.taxLabel.Text = "$0.00"
-        Me.taxLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'discountLabel
-        '
-        Me.discountLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.discountLabel.Location = New System.Drawing.Point(72, 88)
-        Me.discountLabel.Name = "discountLabel"
-        Me.discountLabel.Size = New System.Drawing.Size(100, 23)
-        Me.discountLabel.TabIndex = 7
-        Me.discountLabel.Text = "$0.00"
-        Me.discountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'totalLabel
-        '
-        Me.totalLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.totalLabel.Location = New System.Drawing.Point(72, 122)
-        Me.totalLabel.Name = "totalLabel"
-        Me.totalLabel.Size = New System.Drawing.Size(100, 23)
-        Me.totalLabel.TabIndex = 7
-        Me.totalLabel.Text = "$0.00"
-        Me.totalLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'MainForm
         '

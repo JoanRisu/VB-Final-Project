@@ -6,6 +6,7 @@
 
     End Structure
 
+
     Private counter As Integer
 
     Private Sub exitButton_Click(sender As Object, e As EventArgs) Handles exitButton.Click
@@ -47,8 +48,13 @@
 
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
         Dim count As Integer = orderList.Items.Count
-        orderList.Items.Add(availableList.FocusedItem.Text)
-        orderList.Items(count).SubItems.Add(availableList.Items(availableList.FocusedItem.Index).SubItems(1).Text)
+        If availableList.FocusedItem Is Nothing Then
+            MessageBox.Show("Please select an item to add!", "No Item Selected", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+        Else
+            orderList.Items.Add(availableList.FocusedItem.Text)
+            orderList.Items(count).SubItems.Add(availableList.Items(availableList.FocusedItem.Index).SubItems(1).Text)
+        End If
+
 
     End Sub
 
@@ -102,7 +108,16 @@
     End Sub
 
     Private Sub clearButton_Click(sender As Object, e As EventArgs) Handles clearButton.Click
-        orderList.Clear()
+        orderList.Items.Clear()
+
+    End Sub
+
+    Private Sub removeButton_Click(sender As Object, e As EventArgs) Handles removeButton.Click
+        If orderList.FocusedItem Is Nothing Then
+            MessageBox.Show("Your order is already empty!", "Order Empty", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+        Else
+            orderList.FocusedItem.Remove()
+        End If
 
     End Sub
 End Class

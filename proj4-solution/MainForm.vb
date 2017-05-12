@@ -1,9 +1,6 @@
 ﻿Public Class MainForm
     Private counter As Integer
 
-    Private itemArray(9, 1) As String
-
-
     Private Sub exitButton_Click(sender As Object, e As EventArgs) Handles exitButton.Click
         Me.Close()
 
@@ -27,19 +24,17 @@
         itemTitle = "Add Item"
         itemMessage = "Enter Item Name"
 
-        itemArray(counter, 0) = InputBox(itemMessage, itemTitle, "[name]")
+        itemName = InputBox(itemMessage, itemTitle, "[name]")
 
         priceTitle = "Add item price"
         priceMessage = "Enter item price"
 
-        itemArray(counter, 1) = InputBox(priceMessage, priceTitle, "$0.00")
+        priceName = InputBox(priceMessage, priceTitle, "$0.00")
 
-        availableList.Items.Add(itemArray(counter, 0))
-        availableList.Items(counter).SubItems.Add(itemArray(counter, 1))
+        availableList.Items.Add(itemName)
+        availableList.Items(counter).SubItems.Add(priceName)
 
         counter += 1
-
-
 
     End Sub
 
@@ -47,6 +42,10 @@
     End Sub
 
     Private Sub deleteItemButton_Click(sender As Object, e As EventArgs) Handles deleteItemButton.Click
+        Dim itemName As String
+        Dim priceName As Double
+
+        'This is to catch any errors that may arise from deleting items
         If (availableList.Items.Count = 0) Then
             MessageBox.Show("List is already empty!", "Delete Item",
             MessageBoxButtons.OK, MessageBoxIcon.Exclamation,
@@ -64,15 +63,14 @@
                 MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation,
                                 MessageBoxDefaultButton.Button1)
                 If button = DialogResult.Yes Then
-                    itemArray(0, 0) = InputBox("Enter item name:", "Add Item", "[name]")
-                    itemArray(0, 1) = InputBox("Enter item price:", "Add Item", "$0.00")
+                    itemName = InputBox("Enter item name:", "Add Item", "[name]")
+                    priceName = InputBox("Enter item price:", "Add Item", "$0.00")
 
-                    availableList.Items(0).Text = itemArray(0, 0)
-                    availableList.Items(0).SubItems(1).Text = itemArray(0, 1)
+                    availableList.Items(0).Text = itemName
+                    availableList.Items(0).SubItems(1).Text = priceName
                 End If
             Else
-                availableList.Items.RemoveAt(availableList.FocusedItem.Index)
-                itemArray(availableList.FocusedItem.Index, 0) = String.Empty
+                availableList.Items.RemoveAt(listIndex)
             End If
         End If
 

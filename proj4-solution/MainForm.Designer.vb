@@ -53,24 +53,27 @@ Partial Class MainForm
         Me.subTotalLabel = New System.Windows.Forms.Label()
         Me.loadButton = New System.Windows.Forms.Button()
         Me.saveButton = New System.Windows.Forms.Button()
+        Me.testLabel = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'exitButton
         '
-        Me.exitButton.Location = New System.Drawing.Point(250, 184)
+        Me.exitButton.Location = New System.Drawing.Point(583, 410)
+        Me.exitButton.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
         Me.exitButton.Name = "exitButton"
-        Me.exitButton.Size = New System.Drawing.Size(75, 23)
+        Me.exitButton.Size = New System.Drawing.Size(175, 51)
         Me.exitButton.TabIndex = 0
         Me.exitButton.Text = "E&xit"
         Me.exitButton.UseVisualStyleBackColor = True
         '
         'addItemButton
         '
-        Me.addItemButton.Location = New System.Drawing.Point(58, 245)
+        Me.addItemButton.Location = New System.Drawing.Point(135, 547)
+        Me.addItemButton.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
         Me.addItemButton.Name = "addItemButton"
-        Me.addItemButton.Size = New System.Drawing.Size(106, 23)
+        Me.addItemButton.Size = New System.Drawing.Size(247, 51)
         Me.addItemButton.TabIndex = 1
         Me.addItemButton.Text = "Add List Item"
         Me.addItemButton.UseVisualStyleBackColor = True
@@ -78,9 +81,10 @@ Partial Class MainForm
         'availableList
         '
         Me.availableList.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.itemCHeader, Me.priceCHeader})
-        Me.availableList.Location = New System.Drawing.Point(12, 58)
+        Me.availableList.Location = New System.Drawing.Point(33, 129)
+        Me.availableList.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
         Me.availableList.Name = "availableList"
-        Me.availableList.Size = New System.Drawing.Size(232, 181)
+        Me.availableList.Size = New System.Drawing.Size(536, 399)
         Me.availableList.TabIndex = 2
         Me.availableList.UseCompatibleStateImageBehavior = False
         Me.availableList.View = System.Windows.Forms.View.Details
@@ -88,36 +92,39 @@ Partial Class MainForm
         'itemCHeader
         '
         Me.itemCHeader.Text = "Item"
-        Me.itemCHeader.Width = 113
+        Me.itemCHeader.Width = 217
         '
         'priceCHeader
         '
         Me.priceCHeader.Text = "Item Price"
-        Me.priceCHeader.Width = 112
+        Me.priceCHeader.Width = 172
         '
         'deleteItemButton
         '
-        Me.deleteItemButton.Location = New System.Drawing.Point(58, 274)
+        Me.deleteItemButton.Location = New System.Drawing.Point(135, 611)
+        Me.deleteItemButton.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
         Me.deleteItemButton.Name = "deleteItemButton"
-        Me.deleteItemButton.Size = New System.Drawing.Size(106, 23)
+        Me.deleteItemButton.Size = New System.Drawing.Size(247, 51)
         Me.deleteItemButton.TabIndex = 3
         Me.deleteItemButton.Text = "Delete List Item"
         Me.deleteItemButton.UseVisualStyleBackColor = True
         '
         'addButton
         '
-        Me.addButton.Location = New System.Drawing.Point(250, 97)
+        Me.addButton.Location = New System.Drawing.Point(583, 216)
+        Me.addButton.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
         Me.addButton.Name = "addButton"
-        Me.addButton.Size = New System.Drawing.Size(75, 23)
+        Me.addButton.Size = New System.Drawing.Size(175, 51)
         Me.addButton.TabIndex = 4
         Me.addButton.Text = "Add"
         Me.addButton.UseVisualStyleBackColor = True
         '
         'removeButton
         '
-        Me.removeButton.Location = New System.Drawing.Point(250, 126)
+        Me.removeButton.Location = New System.Drawing.Point(583, 281)
+        Me.removeButton.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
         Me.removeButton.Name = "removeButton"
-        Me.removeButton.Size = New System.Drawing.Size(75, 23)
+        Me.removeButton.Size = New System.Drawing.Size(175, 51)
         Me.removeButton.TabIndex = 5
         Me.removeButton.Text = "Remove"
         Me.removeButton.UseVisualStyleBackColor = True
@@ -125,9 +132,10 @@ Partial Class MainForm
         'orderList
         '
         Me.orderList.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3})
-        Me.orderList.Location = New System.Drawing.Point(332, 58)
+        Me.orderList.Location = New System.Drawing.Point(775, 129)
+        Me.orderList.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
         Me.orderList.Name = "orderList"
-        Me.orderList.Size = New System.Drawing.Size(275, 181)
+        Me.orderList.Size = New System.Drawing.Size(636, 399)
         Me.orderList.TabIndex = 2
         Me.orderList.UseCompatibleStateImageBehavior = False
         Me.orderList.View = System.Windows.Forms.View.Details
@@ -140,54 +148,59 @@ Partial Class MainForm
         'ColumnHeader2
         '
         Me.ColumnHeader2.Text = "Item Price"
-        Me.ColumnHeader2.Width = 78
+        Me.ColumnHeader2.Width = 144
         '
         'ColumnHeader3
         '
         Me.ColumnHeader3.Text = "Quantity"
-        Me.ColumnHeader3.Width = 61
+        Me.ColumnHeader3.Width = 192
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(6, 25)
+        Me.Label1.Location = New System.Drawing.Point(14, 56)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(7, 0, 7, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(49, 13)
+        Me.Label1.Size = New System.Drawing.Size(107, 29)
         Me.Label1.TabIndex = 6
         Me.Label1.Text = "Subtotal:"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(3, 93)
+        Me.Label2.Location = New System.Drawing.Point(7, 207)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(7, 0, 7, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(52, 13)
+        Me.Label2.Size = New System.Drawing.Size(112, 29)
         Me.Label2.TabIndex = 6
         Me.Label2.Text = "Discount:"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(27, 59)
+        Me.Label3.Location = New System.Drawing.Point(63, 132)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(7, 0, 7, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(28, 13)
+        Me.Label3.Size = New System.Drawing.Size(59, 29)
         Me.Label3.TabIndex = 6
         Me.Label3.Text = "Tax:"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(21, 127)
+        Me.Label4.Location = New System.Drawing.Point(49, 283)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(7, 0, 7, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(34, 13)
+        Me.Label4.Size = New System.Drawing.Size(74, 29)
         Me.Label4.TabIndex = 6
         Me.Label4.Text = "Total:"
         '
         'clearButton
         '
-        Me.clearButton.Location = New System.Drawing.Point(250, 155)
+        Me.clearButton.Location = New System.Drawing.Point(583, 346)
+        Me.clearButton.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
         Me.clearButton.Name = "clearButton"
-        Me.clearButton.Size = New System.Drawing.Size(75, 23)
+        Me.clearButton.Size = New System.Drawing.Size(175, 51)
         Me.clearButton.TabIndex = 5
         Me.clearButton.Text = "Clear"
         Me.clearButton.UseVisualStyleBackColor = True
@@ -195,18 +208,20 @@ Partial Class MainForm
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(89, 42)
+        Me.Label5.Location = New System.Drawing.Point(208, 94)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(7, 0, 7, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(78, 13)
+        Me.Label5.Size = New System.Drawing.Size(175, 29)
         Me.Label5.TabIndex = 7
         Me.Label5.Text = "Available Items"
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(453, 42)
+        Me.Label6.Location = New System.Drawing.Point(1057, 94)
+        Me.Label6.Margin = New System.Windows.Forms.Padding(7, 0, 7, 0)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(33, 13)
+        Me.Label6.Size = New System.Drawing.Size(76, 29)
         Me.Label6.TabIndex = 7
         Me.Label6.Text = "Order"
         '
@@ -216,27 +231,31 @@ Partial Class MainForm
         Me.GroupBox1.Controls.Add(Me.otherCheckBox)
         Me.GroupBox1.Controls.Add(Me.CheckBox2)
         Me.GroupBox1.Controls.Add(Me.CheckBox1)
-        Me.GroupBox1.Location = New System.Drawing.Point(230, 250)
+        Me.GroupBox1.Location = New System.Drawing.Point(537, 558)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(114, 120)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(7, 7, 7, 7)
+        Me.GroupBox1.Size = New System.Drawing.Size(266, 268)
         Me.GroupBox1.TabIndex = 8
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Discounts"
         '
         'otherDiscountTextBox
         '
-        Me.otherDiscountTextBox.Location = New System.Drawing.Point(6, 87)
+        Me.otherDiscountTextBox.Location = New System.Drawing.Point(14, 194)
+        Me.otherDiscountTextBox.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
         Me.otherDiscountTextBox.Name = "otherDiscountTextBox"
         Me.otherDiscountTextBox.ReadOnly = True
-        Me.otherDiscountTextBox.Size = New System.Drawing.Size(100, 20)
+        Me.otherDiscountTextBox.Size = New System.Drawing.Size(228, 35)
         Me.otherDiscountTextBox.TabIndex = 10
         '
         'otherCheckBox
         '
         Me.otherCheckBox.AutoSize = True
-        Me.otherCheckBox.Location = New System.Drawing.Point(7, 68)
+        Me.otherCheckBox.Location = New System.Drawing.Point(16, 152)
+        Me.otherCheckBox.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
         Me.otherCheckBox.Name = "otherCheckBox"
-        Me.otherCheckBox.Size = New System.Drawing.Size(52, 17)
+        Me.otherCheckBox.Size = New System.Drawing.Size(105, 33)
         Me.otherCheckBox.TabIndex = 2
         Me.otherCheckBox.Text = "Other"
         Me.otherCheckBox.UseVisualStyleBackColor = True
@@ -244,9 +263,10 @@ Partial Class MainForm
         'CheckBox2
         '
         Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.Location = New System.Drawing.Point(7, 44)
+        Me.CheckBox2.Location = New System.Drawing.Point(16, 98)
+        Me.CheckBox2.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
         Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(81, 17)
+        Me.CheckBox2.Size = New System.Drawing.Size(167, 33)
         Me.CheckBox2.TabIndex = 1
         Me.CheckBox2.Text = "CheckBox2"
         Me.CheckBox2.UseVisualStyleBackColor = True
@@ -254,9 +274,10 @@ Partial Class MainForm
         'CheckBox1
         '
         Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(7, 20)
+        Me.CheckBox1.Location = New System.Drawing.Point(16, 45)
+        Me.CheckBox1.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
         Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(81, 17)
+        Me.CheckBox1.Size = New System.Drawing.Size(167, 33)
         Me.CheckBox1.TabIndex = 0
         Me.CheckBox1.Text = "CheckBox1"
         Me.CheckBox1.UseVisualStyleBackColor = True
@@ -271,9 +292,11 @@ Partial Class MainForm
         Me.GroupBox2.Controls.Add(Me.Label1)
         Me.GroupBox2.Controls.Add(Me.Label3)
         Me.GroupBox2.Controls.Add(Me.Label4)
-        Me.GroupBox2.Location = New System.Drawing.Point(373, 250)
+        Me.GroupBox2.Location = New System.Drawing.Point(870, 558)
+        Me.GroupBox2.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(200, 158)
+        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(7, 7, 7, 7)
+        Me.GroupBox2.Size = New System.Drawing.Size(467, 352)
         Me.GroupBox2.TabIndex = 9
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Total Sale"
@@ -281,9 +304,10 @@ Partial Class MainForm
         'totalLabel
         '
         Me.totalLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.totalLabel.Location = New System.Drawing.Point(72, 122)
+        Me.totalLabel.Location = New System.Drawing.Point(168, 272)
+        Me.totalLabel.Margin = New System.Windows.Forms.Padding(7, 0, 7, 0)
         Me.totalLabel.Name = "totalLabel"
-        Me.totalLabel.Size = New System.Drawing.Size(100, 23)
+        Me.totalLabel.Size = New System.Drawing.Size(233, 51)
         Me.totalLabel.TabIndex = 7
         Me.totalLabel.Text = "$0.00"
         Me.totalLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -291,9 +315,10 @@ Partial Class MainForm
         'discountLabel
         '
         Me.discountLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.discountLabel.Location = New System.Drawing.Point(72, 88)
+        Me.discountLabel.Location = New System.Drawing.Point(168, 196)
+        Me.discountLabel.Margin = New System.Windows.Forms.Padding(7, 0, 7, 0)
         Me.discountLabel.Name = "discountLabel"
-        Me.discountLabel.Size = New System.Drawing.Size(100, 23)
+        Me.discountLabel.Size = New System.Drawing.Size(233, 51)
         Me.discountLabel.TabIndex = 7
         Me.discountLabel.Text = "$0.00"
         Me.discountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -301,9 +326,10 @@ Partial Class MainForm
         'taxLabel
         '
         Me.taxLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.taxLabel.Location = New System.Drawing.Point(72, 54)
+        Me.taxLabel.Location = New System.Drawing.Point(168, 120)
+        Me.taxLabel.Margin = New System.Windows.Forms.Padding(7, 0, 7, 0)
         Me.taxLabel.Name = "taxLabel"
-        Me.taxLabel.Size = New System.Drawing.Size(100, 23)
+        Me.taxLabel.Size = New System.Drawing.Size(233, 51)
         Me.taxLabel.TabIndex = 7
         Me.taxLabel.Text = "$0.00"
         Me.taxLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -311,36 +337,49 @@ Partial Class MainForm
         'subTotalLabel
         '
         Me.subTotalLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.subTotalLabel.Location = New System.Drawing.Point(72, 20)
+        Me.subTotalLabel.Location = New System.Drawing.Point(168, 45)
+        Me.subTotalLabel.Margin = New System.Windows.Forms.Padding(7, 0, 7, 0)
         Me.subTotalLabel.Name = "subTotalLabel"
-        Me.subTotalLabel.Size = New System.Drawing.Size(100, 23)
+        Me.subTotalLabel.Size = New System.Drawing.Size(233, 51)
         Me.subTotalLabel.TabIndex = 7
         Me.subTotalLabel.Text = "$0.00"
         Me.subTotalLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'loadButton
         '
-        Me.loadButton.Location = New System.Drawing.Point(58, 303)
+        Me.loadButton.Location = New System.Drawing.Point(135, 676)
+        Me.loadButton.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
         Me.loadButton.Name = "loadButton"
-        Me.loadButton.Size = New System.Drawing.Size(106, 23)
+        Me.loadButton.Size = New System.Drawing.Size(247, 51)
         Me.loadButton.TabIndex = 10
         Me.loadButton.Text = "Load List"
         Me.loadButton.UseVisualStyleBackColor = True
         '
         'saveButton
         '
-        Me.saveButton.Location = New System.Drawing.Point(58, 332)
+        Me.saveButton.Location = New System.Drawing.Point(135, 741)
+        Me.saveButton.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
         Me.saveButton.Name = "saveButton"
-        Me.saveButton.Size = New System.Drawing.Size(106, 23)
+        Me.saveButton.Size = New System.Drawing.Size(247, 51)
         Me.saveButton.TabIndex = 10
         Me.saveButton.Text = "Save List"
         Me.saveButton.UseVisualStyleBackColor = True
         '
+        'testLabel
+        '
+        Me.testLabel.AutoSize = True
+        Me.testLabel.Location = New System.Drawing.Point(583, 51)
+        Me.testLabel.Name = "testLabel"
+        Me.testLabel.Size = New System.Drawing.Size(86, 29)
+        Me.testLabel.TabIndex = 11
+        Me.testLabel.Text = "Label7"
+        '
         'MainForm
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(14.0!, 29.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(629, 434)
+        Me.ClientSize = New System.Drawing.Size(1468, 968)
+        Me.Controls.Add(Me.testLabel)
         Me.Controls.Add(Me.saveButton)
         Me.Controls.Add(Me.loadButton)
         Me.Controls.Add(Me.GroupBox2)
@@ -355,6 +394,7 @@ Partial Class MainForm
         Me.Controls.Add(Me.availableList)
         Me.Controls.Add(Me.addItemButton)
         Me.Controls.Add(Me.exitButton)
+        Me.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
         Me.Name = "MainForm"
         Me.Text = "POS"
         Me.GroupBox1.ResumeLayout(False)
@@ -397,4 +437,5 @@ Partial Class MainForm
     Friend WithEvents discountLabel As Label
     Friend WithEvents taxLabel As Label
     Friend WithEvents subTotalLabel As Label
+    Friend WithEvents testLabel As Label
 End Class

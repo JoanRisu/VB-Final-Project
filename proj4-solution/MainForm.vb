@@ -1,4 +1,12 @@
 ﻿Public Class MainForm
+    Private Structure Item
+        Public itemName As String
+        Public itemPrice As Double
+        Public itemQnty As Integer
+
+    End Structure
+
+
     Private counter As Integer
 
     Private Sub exitButton_Click(sender As Object, e As EventArgs) Handles exitButton.Click
@@ -32,13 +40,22 @@
         priceName = InputBox(priceMessage, priceTitle, "$0.00")
 
         availableList.Items.Add(itemName)
-        availableList.Items(counter).SubItems.Add(priceName)
+        availableList.Items(counter).SubItems.Add(priceName.ToString("C02"))
 
         counter += 1
 
     End Sub
 
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
+        Dim count As Integer = orderList.Items.Count
+        If availableList.FocusedItem Is Nothing Then
+            MessageBox.Show("Please select an item to add!", "No Item Selected", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+        Else
+            orderList.Items.Add(availableList.FocusedItem.Text)
+            orderList.Items(count).SubItems.Add(availableList.Items(availableList.FocusedItem.Index).SubItems(1).Text)
+        End If
+
+
     End Sub
 
     Private Sub deleteItemButton_Click(sender As Object, e As EventArgs) Handles deleteItemButton.Click
@@ -67,7 +84,7 @@
                     priceName = InputBox("Enter item price:", "Add Item", "$0.00")
 
                     availableList.Items(0).Text = itemName
-                    availableList.Items(0).SubItems(1).Text = priceName
+                    availableList.Items(0).SubItems(1).Text = priceName.ToString("C02")
                 End If
             Else
                 availableList.Items.RemoveAt(listIndex)
@@ -75,6 +92,32 @@
         End If
 
 
+
+    End Sub
+
+    Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
+
+    Private Sub saveButton_Click(sender As Object, e As EventArgs) Handles saveButton.Click
+        Dim itemCount As Integer = availableList.Items.Count
+        Dim itemArray(itemCount - 1, 0) As String
+        'because the array is for the save files, we can recreate the array every time by limiting the scope to the save button.
+
+
+    End Sub
+
+    Private Sub clearButton_Click(sender As Object, e As EventArgs) Handles clearButton.Click
+        orderList.Items.Clear()
+
+    End Sub
+
+    Private Sub removeButton_Click(sender As Object, e As EventArgs) Handles removeButton.Click
+        If orderList.FocusedItem Is Nothing Then
+            MessageBox.Show("Your order is already empty!", "Order Empty", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+        Else
+            orderList.FocusedItem.Remove()
+        End If
 
     End Sub
 End Class

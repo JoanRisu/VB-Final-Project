@@ -1,20 +1,5 @@
-﻿' Project name:         Flexible POS System
-' Project purpose:      To provide a flexible POS for businesses.
-
-
-
-
-
-Public Class MainForm
+﻿Public Class MainForm
     Private counter As Integer
-    Private otherDiscount As Double
-    Const tax As Double = 0.15
-    Const clubDiscount As Double = 0.1
-    Const staffDiscount As Double = 0.05
-    Private totalDiscount As Double
-
-
-
 
     Private Sub exitButton_Click(sender As Object, e As EventArgs) Handles exitButton.Click
         Me.Close()
@@ -28,11 +13,7 @@ Public Class MainForm
         ElseIf otherCheckBox.Checked = True Then
             otherDiscountTextBox.ReadOnly = False
         End If
-
-
     End Sub
-
-
 
     'this will add an item using a popup input box
     Private Sub addItemButton_Click(sender As Object, e As EventArgs) Handles addItemButton.Click
@@ -48,10 +29,10 @@ Public Class MainForm
         priceTitle = "Add item price"
         priceMessage = "Enter item price"
 
-        Double.TryParse(InputBox(priceMessage, priceTitle, "$0.00"), priceName)
+        priceName = InputBox(priceMessage, priceTitle, "$0.00")
 
         availableList.Items.Add(itemName)
-        availableList.Items(counter).SubItems.Add(priceName.ToString("C02"))
+        availableList.Items(counter).SubItems.Add(priceName)
 
         counter += 1
 
@@ -83,9 +64,10 @@ Public Class MainForm
                                 MessageBoxDefaultButton.Button1)
                 If button = DialogResult.Yes Then
                     itemName = InputBox("Enter item name:", "Add Item", "[name]")
-                    Double.TryParse(InputBox("Enter item price:", "Add Item", "$0.00"), priceName)
+                    priceName = InputBox("Enter item price:", "Add Item", "$0.00")
+
                     availableList.Items(0).Text = itemName
-                    availableList.Items(0).SubItems(1).Text = priceName.ToString("C02")
+                    availableList.Items(0).SubItems(1).Text = priceName
                 End If
             Else
                 availableList.Items.RemoveAt(listIndex)
@@ -95,20 +77,4 @@ Public Class MainForm
 
 
     End Sub
-
-    Private Sub saveButton_Click(sender As Object, e As EventArgs) Handles saveButton.Click
-        Dim itemx As Integer = availableList.Items.Count
-        Dim itemarray(itemx, 1) As String
-        'because the array is for the save files, we can recreate the array every time by limiting the scope to the save button.
-
-
-
-    End Sub
-
-    Private Sub otherDiscountTextBox_TextChanged(sender As Object, e As EventArgs) Handles otherDiscountTextBox.TextChanged
-        Double.TryParse(otherDiscountTextBox.Text, otherDiscount)
-        'this updates otherDiscount automatically before final calculation.
-    End Sub
-
-
 End Class

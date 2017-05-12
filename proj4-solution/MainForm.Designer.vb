@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class MainForm
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()>
+    <System.Diagnostics.DebuggerNonUserCode()> _
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class MainForm
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()>
+    <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.exitButton = New System.Windows.Forms.Button()
         Me.addItemButton = New System.Windows.Forms.Button()
@@ -44,8 +44,8 @@ Partial Class MainForm
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.otherDiscountTextBox = New System.Windows.Forms.TextBox()
         Me.otherCheckBox = New System.Windows.Forms.CheckBox()
-        Me.staffCheckBox = New System.Windows.Forms.CheckBox()
-        Me.clubCheckBox = New System.Windows.Forms.CheckBox()
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.totalLabel = New System.Windows.Forms.Label()
         Me.discountLabel = New System.Windows.Forms.Label()
@@ -53,7 +53,6 @@ Partial Class MainForm
         Me.subTotalLabel = New System.Windows.Forms.Label()
         Me.loadButton = New System.Windows.Forms.Button()
         Me.saveButton = New System.Windows.Forms.Button()
-        Me.calcButton = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -215,11 +214,11 @@ Partial Class MainForm
         '
         Me.GroupBox1.Controls.Add(Me.otherDiscountTextBox)
         Me.GroupBox1.Controls.Add(Me.otherCheckBox)
-        Me.GroupBox1.Controls.Add(Me.staffCheckBox)
-        Me.GroupBox1.Controls.Add(Me.clubCheckBox)
-        Me.GroupBox1.Location = New System.Drawing.Point(217, 250)
+        Me.GroupBox1.Controls.Add(Me.CheckBox2)
+        Me.GroupBox1.Controls.Add(Me.CheckBox1)
+        Me.GroupBox1.Location = New System.Drawing.Point(230, 250)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(127, 120)
+        Me.GroupBox1.Size = New System.Drawing.Size(114, 120)
         Me.GroupBox1.TabIndex = 8
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Discounts"
@@ -242,25 +241,25 @@ Partial Class MainForm
         Me.otherCheckBox.Text = "Other"
         Me.otherCheckBox.UseVisualStyleBackColor = True
         '
-        'staffCheckBox
+        'CheckBox2
         '
-        Me.staffCheckBox.AutoSize = True
-        Me.staffCheckBox.Location = New System.Drawing.Point(7, 44)
-        Me.staffCheckBox.Name = "staffCheckBox"
-        Me.staffCheckBox.Size = New System.Drawing.Size(71, 17)
-        Me.staffCheckBox.TabIndex = 1
-        Me.staffCheckBox.Text = "Staff (5%)"
-        Me.staffCheckBox.UseVisualStyleBackColor = True
+        Me.CheckBox2.AutoSize = True
+        Me.CheckBox2.Location = New System.Drawing.Point(7, 44)
+        Me.CheckBox2.Name = "CheckBox2"
+        Me.CheckBox2.Size = New System.Drawing.Size(81, 17)
+        Me.CheckBox2.TabIndex = 1
+        Me.CheckBox2.Text = "CheckBox2"
+        Me.CheckBox2.UseVisualStyleBackColor = True
         '
-        'clubCheckBox
+        'CheckBox1
         '
-        Me.clubCheckBox.AutoSize = True
-        Me.clubCheckBox.Location = New System.Drawing.Point(7, 20)
-        Me.clubCheckBox.Name = "clubCheckBox"
-        Me.clubCheckBox.Size = New System.Drawing.Size(117, 17)
-        Me.clubCheckBox.TabIndex = 0
-        Me.clubCheckBox.Text = "Club Member (10%)"
-        Me.clubCheckBox.UseVisualStyleBackColor = True
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(7, 20)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(81, 17)
+        Me.CheckBox1.TabIndex = 0
+        Me.CheckBox1.Text = "CheckBox1"
+        Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'GroupBox2
         '
@@ -337,21 +336,11 @@ Partial Class MainForm
         Me.saveButton.Text = "Save List"
         Me.saveButton.UseVisualStyleBackColor = True
         '
-        'calcButton
-        '
-        Me.calcButton.Location = New System.Drawing.Point(456, 414)
-        Me.calcButton.Name = "calcButton"
-        Me.calcButton.Size = New System.Drawing.Size(75, 23)
-        Me.calcButton.TabIndex = 11
-        Me.calcButton.Text = "Calculate"
-        Me.calcButton.UseVisualStyleBackColor = True
-        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(629, 450)
-        Me.Controls.Add(Me.calcButton)
+        Me.ClientSize = New System.Drawing.Size(629, 434)
         Me.Controls.Add(Me.saveButton)
         Me.Controls.Add(Me.loadButton)
         Me.Controls.Add(Me.GroupBox2)
@@ -399,8 +388,8 @@ Partial Class MainForm
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents otherDiscountTextBox As TextBox
     Friend WithEvents otherCheckBox As CheckBox
-    Friend WithEvents staffCheckBox As CheckBox
-    Friend WithEvents clubCheckBox As CheckBox
+    Friend WithEvents CheckBox2 As CheckBox
+    Friend WithEvents CheckBox1 As CheckBox
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents loadButton As Button
     Friend WithEvents saveButton As Button
@@ -408,5 +397,4 @@ Partial Class MainForm
     Friend WithEvents discountLabel As Label
     Friend WithEvents taxLabel As Label
     Friend WithEvents subTotalLabel As Label
-    Friend WithEvents calcButton As Button
 End Class

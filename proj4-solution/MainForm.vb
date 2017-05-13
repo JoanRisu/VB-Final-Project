@@ -1,4 +1,14 @@
-﻿Public Class MainForm
+﻿' Project name:         <project name>
+' Project purpose:      <purpose>
+' Created/revised by:   <your name> on <current date>
+
+Option Explicit On
+Option Strict On
+Option Infer Off
+
+
+
+Public Class MainForm
     Private Structure Item
         Public itemName As String
         Public itemPrice As Double
@@ -13,6 +23,8 @@
     Dim discoutStaff As Boolean
 
     Private counter As Integer
+    Dim pricesA As New List(Of Double)
+    Dim pricesO As New List(Of Double)
 
     Private Sub exitButton_Click(sender As Object, e As EventArgs) Handles exitButton.Click
         Me.Close()
@@ -42,31 +54,33 @@
         priceTitle = "Add item price"
         priceMessage = "Enter item price"
 
-        priceName = InputBox(priceMessage, priceTitle, "$0.00")
+        Double.TryParse(InputBox(priceMessage, priceTitle, "$0.00"), priceName)
 
         availableList.Items.Add(itemName)
         availableList.Items(counter).SubItems.Add(priceName.ToString("C02"))
 
         counter += 1
 
+        pricesA.Add(priceName)
+
     End Sub
 
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
         Dim count As Integer = orderList.Items.Count
         Dim itemListName As ListViewItem = availableList.FocusedItem
-        Dim itemCost As String
-        Dim cost As Double
 
         If itemListName Is Nothing Then
             MessageBox.Show("Please select an item to add!", "No Item Selected", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         Else
             orderList.Items.Add(itemListName.Text)
             orderList.Items(count).SubItems.Add(availableList.Items(itemListName.Index).SubItems(1).Text)
+            pricesO.Add(pricesA(itemListName.Index))
 
-            itemCost = availableList.Items(itemListName.Index).SubItems(1).Text
-            Double.TryParse(itemCost, cost)
+            subtotal = pricesO.Sum
 
-            testLabel.Text = cost.ToString("C2")
+            subTotalLabel.Text = subtotal.ToString("C02")
+
+
         End If
 
 
@@ -85,7 +99,6 @@
             Dim listIndex As Integer
             Dim button As DialogResult
 
-            availableList.Items(0).Focused = True
 
             listIndex = availableList.FocusedItem.Index
             If (availableList.Items.Count = 1) Then
@@ -95,13 +108,15 @@
                                 MessageBoxDefaultButton.Button1)
                 If button = DialogResult.Yes Then
                     itemName = InputBox("Enter item name:", "Add Item", "[name]")
-                    priceName = InputBox("Enter item price:", "Add Item", "$0.00")
+                    Double.TryParse(InputBox("Enter item price:", "Add Item", "$0.00"), priceName)
+
 
                     availableList.Items(0).Text = itemName
                     availableList.Items(0).SubItems(1).Text = priceName.ToString("C02")
                 End If
             Else
                 availableList.Items.RemoveAt(listIndex)
+                pricesA.RemoveAt(listIndex)
             End If
         End If
 
@@ -116,7 +131,7 @@
     Private Sub saveButton_Click(sender As Object, e As EventArgs) Handles saveButton.Click
         Dim itemCount As Integer = availableList.Items.Count
         Dim itemArray(itemCount - 1, 0) As String
-        'because the array is for the save files, we can recreate the array every time by limiting the scope to the save button.
+        'This array is for the save files. We can recreate the array every time by limiting the scope to the save button.
 
 
     End Sub

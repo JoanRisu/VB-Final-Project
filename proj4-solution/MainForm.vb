@@ -18,6 +18,7 @@ Public Class MainForm
 
     Dim subtotal As Double
     Const taxRate As Double = 0.08
+    Dim taxTotal As Double
     Dim total As Double
     Dim discountClub As Boolean
     Dim discoutStaff As Boolean
@@ -49,20 +50,30 @@ Public Class MainForm
         itemTitle = "Add Item"
         itemMessage = "Enter Item Name"
 
-        itemName = InputBox(itemMessage, itemTitle, "[name]")
+        itemName = InputBox(itemMessage, itemTitle, "Name")
 
         priceTitle = "Add item price"
         priceMessage = "Enter item price"
 
         Double.TryParse(InputBox(priceMessage, priceTitle, "$0.00"), priceName)
 
-        availableList.Items.Add(itemName)
-        availableList.Items(counter).SubItems.Add(priceName.ToString("C02"))
+        If availableList.Items.Count = 0 Then
+            counter = 0
+            availableList.Items.Add(itemName)
+            availableList.Items(counter).SubItems.Add(priceName.ToString("C02"))
 
-        counter += 1
+            counter = availableList.Items.Count
 
-        pricesA.Add(priceName)
+            pricesA.Add(priceName)
+        Else
+            availableList.Items.Add(itemName)
+            availableList.Items(counter).SubItems.Add(priceName.ToString("C02"))
 
+            counter = availableList.Items.Count
+
+            pricesA.Add(priceName)
+        End If
+        testLabel.Text = counter.ToString
     End Sub
 
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
@@ -77,18 +88,19 @@ Public Class MainForm
             pricesO.Add(pricesA(itemListName.Index))
 
             subtotal = pricesO.Sum
-
             subTotalLabel.Text = subtotal.ToString("C02")
-
+            taxTotal = subtotal * taxRate
+            taxLabel.Text = taxTotal.ToString("C2")
+            total = subtotal + taxTotal
+            totalLabel.Text = total.ToString("C2")
 
         End If
-
-
+        testLabel.Text = counter.ToString
     End Sub
 
     Private Sub deleteItemButton_Click(sender As Object, e As EventArgs) Handles deleteItemButton.Click
-        Dim itemName As String
-        Dim priceName As Double
+        'Dim itemName As String
+        'Dim priceName As Double
 
         'This is to catch any errors that may arise from deleting items
         If (availableList.Items.Count = 0) Then
@@ -97,31 +109,34 @@ Public Class MainForm
                             MessageBoxDefaultButton.Button1)
         Else
             Dim listIndex As Integer
-            Dim button As DialogResult
+            'Dim button As DialogResult
 
-
-            listIndex = availableList.FocusedItem.Index
             If (availableList.Items.Count = 1) Then
-                button =
-                MessageBox.Show("Cannot delete last entry. Do you want to replace it?", "Item List",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation,
-                                MessageBoxDefaultButton.Button1)
-                If button = DialogResult.Yes Then
-                    itemName = InputBox("Enter item name:", "Add Item", "[name]")
-                    Double.TryParse(InputBox("Enter item price:", "Add Item", "$0.00"), priceName)
-
-
-                    availableList.Items(0).Text = itemName
-                    availableList.Items(0).SubItems(1).Text = priceName.ToString("C02")
-                End If
-            Else
                 availableList.Items.RemoveAt(listIndex)
                 pricesA.RemoveAt(listIndex)
+            ElseIf availableList.FocusedItem Is Nothing Then
+                MessageBox.Show("Please select an item to be deleted.", "Select an Item", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                If counter = 0 Then
+                    counter = 0
+                    availableList.FocusedItem = availableList.Items(availableList.Items.Count)
+                Else
+                    counter -= 0
+                End If
+            Else
+                availableList.Items.RemoveAt(availableList.Items.Count)
+                pricesA.RemoveAt(counter - 1)
+                counter -= 1
+                If counter = 0 Then
+                    counter = 0
+                    availableList.FocusedItem = availableList.Items(counter)
+                Else
+                    counter -= 0
+                End If
             End If
         End If
 
 
-
+        testLabel.Text = counter.ToString
     End Sub
 
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -138,7 +153,15 @@ Public Class MainForm
 
     Private Sub clearButton_Click(sender As Object, e As EventArgs) Handles clearButton.Click
         orderList.Items.Clear()
+        pricesO.Clear()
+        subtotal = 0
+        taxTotal = 0
+        total = 0
 
+        subTotalLabel.Text = subtotal.ToString("C2")
+        taxLabel.Text = taxTotal.ToString("C2")
+        totalLabel.Text = total.ToString("C2")
+        testLabel.Text = counter.ToString
     End Sub
 
     Private Sub removeButton_Click(sender As Object, e As EventArgs) Handles removeButton.Click
@@ -147,8 +170,19 @@ Public Class MainForm
         ElseIf orderList.FocusedItem Is Nothing Then
             MessageBox.Show("Select an item to remove!", "Select Item", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         Else
-            orderList.FocusedItem.Remove()
-        End If
+            Dim orderIndex As Integer
+            orderIndex = orderList.FocusedItem.Index
+            orderList.Items.RemoveAt(orderIndex)
+            pricesO.RemoveAt(orderIndex)
 
+            subtotal = pricesO.Sum
+            subTotalLabel.Text = subtotal.ToString("C02")
+            taxTotal = subtotal * taxRate
+            taxLabel.Text = taxTotal.ToString("C2")
+            total = subtotal + taxTotal
+            totalLabel.Text = total.ToString("C2")
+
+        End If
+        testLabel.Text = counter.ToString
     End Sub
 End Class

@@ -31,3 +31,14 @@ C:\Users\Scott\Documents\Project 4\proj4-solution\obj\Debug\proj4-solution.vbpro
 C:\Users\Scott\Documents\Project 4\proj4-solution\obj\Debug\proj4-solution.exe
 C:\Users\Scott\Documents\Project 4\proj4-solution\obj\Debug\proj4-solution.xml
 C:\Users\Scott\Documents\Project 4\proj4-solution\obj\Debug\proj4-solution.pdb
+C:\Users\Scott\Documents\ProjectFinal\proj4-solution\bin\Debug\proj4-solution.exe.config
+C:\Users\Scott\Documents\ProjectFinal\proj4-solution\bin\Debug\proj4-solution.exe
+C:\Users\Scott\Documents\ProjectFinal\proj4-solution\bin\Debug\proj4-solution.pdb
+C:\Users\Scott\Documents\ProjectFinal\proj4-solution\bin\Debug\proj4-solution.xml
+C:\Users\Scott\Documents\ProjectFinal\proj4-solution\obj\Debug\proj4-solution.vbprojResolveAssemblyReference.cache
+C:\Users\Scott\Documents\ProjectFinal\proj4-solution\obj\Debug\proj4_solution.MainForm.resources
+C:\Users\Scott\Documents\ProjectFinal\proj4-solution\obj\Debug\proj4_solution.Resources.resources
+C:\Users\Scott\Documents\ProjectFinal\proj4-solution\obj\Debug\proj4-solution.vbproj.GenerateResource.Cache
+C:\Users\Scott\Documents\ProjectFinal\proj4-solution\obj\Debug\proj4-solution.exe
+C:\Users\Scott\Documents\ProjectFinal\proj4-solution\obj\Debug\proj4-solution.xml
+C:\Users\Scott\Documents\ProjectFinal\proj4-solution\obj\Debug\proj4-solution.pdb

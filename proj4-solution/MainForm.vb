@@ -1,4 +1,14 @@
-﻿Public Class MainForm
+﻿' Project name:         <project name>
+' Project purpose:      <purpose>
+' Created/revised by:   <your name> on <current date>
+
+Option Explicit On
+Option Strict On
+Option Infer Off
+
+
+
+Public Class MainForm
     Private Structure Item
         Public itemName As String
         Public itemPrice As Double
@@ -6,8 +16,15 @@
 
     End Structure
 
+    Dim subtotal As Double
+    Const taxRate As Double = 0.08
+    Dim total As Double
+    Dim discountClub As Boolean
+    Dim discoutStaff As Boolean
 
     Private counter As Integer
+    Dim pricesA As New List(Of Double)
+    Dim pricesO As New List(Of Double)
 
     Private Sub exitButton_Click(sender As Object, e As EventArgs) Handles exitButton.Click
         Me.Close()
@@ -37,22 +54,33 @@
         priceTitle = "Add item price"
         priceMessage = "Enter item price"
 
-        priceName = InputBox(priceMessage, priceTitle, "$0.00")
+        Double.TryParse(InputBox(priceMessage, priceTitle, "$0.00"), priceName)
 
         availableList.Items.Add(itemName)
         availableList.Items(counter).SubItems.Add(priceName.ToString("C02"))
 
         counter += 1
 
+        pricesA.Add(priceName)
+
     End Sub
 
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
         Dim count As Integer = orderList.Items.Count
-        If availableList.FocusedItem Is Nothing Then
+        Dim itemListName As ListViewItem = availableList.FocusedItem
+
+        If itemListName Is Nothing Then
             MessageBox.Show("Please select an item to add!", "No Item Selected", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         Else
-            orderList.Items.Add(availableList.FocusedItem.Text)
-            orderList.Items(count).SubItems.Add(availableList.Items(availableList.FocusedItem.Index).SubItems(1).Text)
+            orderList.Items.Add(itemListName.Text)
+            orderList.Items(count).SubItems.Add(availableList.Items(itemListName.Index).SubItems(1).Text)
+            pricesO.Add(pricesA(itemListName.Index))
+
+            subtotal = pricesO.Sum
+
+            subTotalLabel.Text = subtotal.ToString("C02")
+
+
         End If
 
 
@@ -71,7 +99,6 @@
             Dim listIndex As Integer
             Dim button As DialogResult
 
-            availableList.Items(0).Focused = True
 
             listIndex = availableList.FocusedItem.Index
             If (availableList.Items.Count = 1) Then
@@ -81,13 +108,15 @@
                                 MessageBoxDefaultButton.Button1)
                 If button = DialogResult.Yes Then
                     itemName = InputBox("Enter item name:", "Add Item", "[name]")
-                    priceName = InputBox("Enter item price:", "Add Item", "$0.00")
+                    Double.TryParse(InputBox("Enter item price:", "Add Item", "$0.00"), priceName)
+
 
                     availableList.Items(0).Text = itemName
                     availableList.Items(0).SubItems(1).Text = priceName.ToString("C02")
                 End If
             Else
                 availableList.Items.RemoveAt(listIndex)
+                pricesA.RemoveAt(listIndex)
             End If
         End If
 
@@ -102,7 +131,7 @@
     Private Sub saveButton_Click(sender As Object, e As EventArgs) Handles saveButton.Click
         Dim itemCount As Integer = availableList.Items.Count
         Dim itemArray(itemCount - 1, 0) As String
-        'because the array is for the save files, we can recreate the array every time by limiting the scope to the save button.
+        'This array is for the save files. We can recreate the array every time by limiting the scope to the save button.
 
 
     End Sub
@@ -113,8 +142,10 @@
     End Sub
 
     Private Sub removeButton_Click(sender As Object, e As EventArgs) Handles removeButton.Click
-        If orderList.FocusedItem Is Nothing Then
-            MessageBox.Show("Your order is already empty!", "Order Empty", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+        If orderList.Items.Count = 0 Then
+            MessageBox.Show("Your order list is already empty!", "Order Empty", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+        ElseIf orderList.FocusedItem Is Nothing Then
+            MessageBox.Show("Select an item to remove!", "Select Item", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         Else
             orderList.FocusedItem.Remove()
         End If

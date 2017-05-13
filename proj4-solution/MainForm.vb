@@ -6,6 +6,11 @@
 
     End Structure
 
+    Dim subtotal As Double
+    Const taxRate As Double = 0.08
+    Dim total As Double
+    Dim discountClub As Boolean
+    Dim discoutStaff As Boolean
 
     Private counter As Integer
 
@@ -48,11 +53,20 @@
 
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
         Dim count As Integer = orderList.Items.Count
-        If availableList.FocusedItem Is Nothing Then
+        Dim itemListName As ListViewItem = availableList.FocusedItem
+        Dim itemCost As String
+        Dim cost As Double
+
+        If itemListName Is Nothing Then
             MessageBox.Show("Please select an item to add!", "No Item Selected", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         Else
-            orderList.Items.Add(availableList.FocusedItem.Text)
-            orderList.Items(count).SubItems.Add(availableList.Items(availableList.FocusedItem.Index).SubItems(1).Text)
+            orderList.Items.Add(itemListName.Text)
+            orderList.Items(count).SubItems.Add(availableList.Items(itemListName.Index).SubItems(1).Text)
+
+            itemCost = availableList.Items(itemListName.Index).SubItems(1).Text
+            Double.TryParse(itemCost, cost)
+
+            testLabel.Text = cost.ToString("C2")
         End If
 
 
@@ -113,8 +127,10 @@
     End Sub
 
     Private Sub removeButton_Click(sender As Object, e As EventArgs) Handles removeButton.Click
-        If orderList.FocusedItem Is Nothing Then
-            MessageBox.Show("Your order is already empty!", "Order Empty", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+        If orderList.Items.Count = 0 Then
+            MessageBox.Show("Your order list is already empty!", "Order Empty", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+        ElseIf orderList.FocusedItem Is Nothing Then
+            MessageBox.Show("Select an item to remove!", "Select Item", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         Else
             orderList.FocusedItem.Remove()
         End If

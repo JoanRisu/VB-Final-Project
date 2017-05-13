@@ -99,7 +99,6 @@ Public Class MainForm
             Dim listIndex As Integer
             Dim button As DialogResult
 
-            availableList.Items(0).Focused = True
 
             listIndex = availableList.FocusedItem.Index
             If (availableList.Items.Count = 1) Then

@@ -42,10 +42,11 @@ Partial Class MainForm
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.otherCheck = New System.Windows.Forms.CheckBox()
+        Me.discountsCheck = New System.Windows.Forms.CheckBox()
+        Me.clubCheck = New System.Windows.Forms.RadioButton()
+        Me.staffCheck = New System.Windows.Forms.RadioButton()
         Me.otherDiscountTextBox = New System.Windows.Forms.TextBox()
-        Me.otherCheckBox = New System.Windows.Forms.CheckBox()
-        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.totalLabel = New System.Windows.Forms.Label()
         Me.discountLabel = New System.Windows.Forms.Label()
@@ -54,14 +55,15 @@ Partial Class MainForm
         Me.loadButton = New System.Windows.Forms.Button()
         Me.saveButton = New System.Windows.Forms.Button()
         Me.testLabel = New System.Windows.Forms.Label()
+        Me.totalButton = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'exitButton
         '
-        Me.exitButton.Location = New System.Drawing.Point(583, 410)
-        Me.exitButton.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
+        Me.exitButton.Location = New System.Drawing.Point(583, 430)
+        Me.exitButton.Margin = New System.Windows.Forms.Padding(7)
         Me.exitButton.Name = "exitButton"
         Me.exitButton.Size = New System.Drawing.Size(175, 51)
         Me.exitButton.TabIndex = 0
@@ -71,7 +73,7 @@ Partial Class MainForm
         'addItemButton
         '
         Me.addItemButton.Location = New System.Drawing.Point(135, 547)
-        Me.addItemButton.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
+        Me.addItemButton.Margin = New System.Windows.Forms.Padding(7)
         Me.addItemButton.Name = "addItemButton"
         Me.addItemButton.Size = New System.Drawing.Size(247, 51)
         Me.addItemButton.TabIndex = 1
@@ -82,7 +84,7 @@ Partial Class MainForm
         '
         Me.availableList.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.itemCHeader, Me.priceCHeader})
         Me.availableList.Location = New System.Drawing.Point(33, 129)
-        Me.availableList.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
+        Me.availableList.Margin = New System.Windows.Forms.Padding(7)
         Me.availableList.Name = "availableList"
         Me.availableList.Size = New System.Drawing.Size(536, 399)
         Me.availableList.TabIndex = 2
@@ -102,7 +104,7 @@ Partial Class MainForm
         'deleteItemButton
         '
         Me.deleteItemButton.Location = New System.Drawing.Point(135, 611)
-        Me.deleteItemButton.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
+        Me.deleteItemButton.Margin = New System.Windows.Forms.Padding(7)
         Me.deleteItemButton.Name = "deleteItemButton"
         Me.deleteItemButton.Size = New System.Drawing.Size(247, 51)
         Me.deleteItemButton.TabIndex = 3
@@ -111,8 +113,8 @@ Partial Class MainForm
         '
         'addButton
         '
-        Me.addButton.Location = New System.Drawing.Point(583, 216)
-        Me.addButton.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
+        Me.addButton.Location = New System.Drawing.Point(583, 170)
+        Me.addButton.Margin = New System.Windows.Forms.Padding(7)
         Me.addButton.Name = "addButton"
         Me.addButton.Size = New System.Drawing.Size(175, 51)
         Me.addButton.TabIndex = 4
@@ -121,8 +123,8 @@ Partial Class MainForm
         '
         'removeButton
         '
-        Me.removeButton.Location = New System.Drawing.Point(583, 281)
-        Me.removeButton.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
+        Me.removeButton.Location = New System.Drawing.Point(583, 235)
+        Me.removeButton.Margin = New System.Windows.Forms.Padding(7)
         Me.removeButton.Name = "removeButton"
         Me.removeButton.Size = New System.Drawing.Size(175, 51)
         Me.removeButton.TabIndex = 5
@@ -133,7 +135,7 @@ Partial Class MainForm
         '
         Me.orderList.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3})
         Me.orderList.Location = New System.Drawing.Point(775, 129)
-        Me.orderList.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
+        Me.orderList.Margin = New System.Windows.Forms.Padding(7)
         Me.orderList.Name = "orderList"
         Me.orderList.Size = New System.Drawing.Size(636, 399)
         Me.orderList.TabIndex = 2
@@ -168,7 +170,7 @@ Partial Class MainForm
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(7, 207)
+        Me.Label2.Location = New System.Drawing.Point(7, 131)
         Me.Label2.Margin = New System.Windows.Forms.Padding(7, 0, 7, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(112, 29)
@@ -178,7 +180,7 @@ Partial Class MainForm
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(63, 132)
+        Me.Label3.Location = New System.Drawing.Point(63, 206)
         Me.Label3.Margin = New System.Windows.Forms.Padding(7, 0, 7, 0)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(59, 29)
@@ -188,7 +190,7 @@ Partial Class MainForm
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(49, 283)
+        Me.Label4.Location = New System.Drawing.Point(49, 281)
         Me.Label4.Margin = New System.Windows.Forms.Padding(7, 0, 7, 0)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(74, 29)
@@ -197,8 +199,8 @@ Partial Class MainForm
         '
         'clearButton
         '
-        Me.clearButton.Location = New System.Drawing.Point(583, 346)
-        Me.clearButton.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
+        Me.clearButton.Location = New System.Drawing.Point(583, 300)
+        Me.clearButton.Margin = New System.Windows.Forms.Padding(7)
         Me.clearButton.Name = "clearButton"
         Me.clearButton.Size = New System.Drawing.Size(175, 51)
         Me.clearButton.TabIndex = 5
@@ -227,60 +229,74 @@ Partial Class MainForm
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.otherCheck)
+        Me.GroupBox1.Controls.Add(Me.discountsCheck)
+        Me.GroupBox1.Controls.Add(Me.clubCheck)
+        Me.GroupBox1.Controls.Add(Me.staffCheck)
         Me.GroupBox1.Controls.Add(Me.otherDiscountTextBox)
-        Me.GroupBox1.Controls.Add(Me.otherCheckBox)
-        Me.GroupBox1.Controls.Add(Me.CheckBox2)
-        Me.GroupBox1.Controls.Add(Me.CheckBox1)
-        Me.GroupBox1.Location = New System.Drawing.Point(537, 558)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
+        Me.GroupBox1.Location = New System.Drawing.Point(497, 558)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(7)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(7, 7, 7, 7)
-        Me.GroupBox1.Size = New System.Drawing.Size(266, 268)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(7)
+        Me.GroupBox1.Size = New System.Drawing.Size(312, 273)
         Me.GroupBox1.TabIndex = 8
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Discounts"
         '
+        'otherCheck
+        '
+        Me.otherCheck.AutoSize = True
+        Me.otherCheck.Location = New System.Drawing.Point(24, 169)
+        Me.otherCheck.Name = "otherCheck"
+        Me.otherCheck.Size = New System.Drawing.Size(105, 33)
+        Me.otherCheck.TabIndex = 16
+        Me.otherCheck.Text = "Other"
+        Me.otherCheck.UseVisualStyleBackColor = True
+        Me.otherCheck.Visible = False
+        '
+        'discountsCheck
+        '
+        Me.discountsCheck.AutoSize = True
+        Me.discountsCheck.Location = New System.Drawing.Point(11, 40)
+        Me.discountsCheck.Name = "discountsCheck"
+        Me.discountsCheck.Size = New System.Drawing.Size(150, 33)
+        Me.discountsCheck.TabIndex = 15
+        Me.discountsCheck.Text = "Discounts"
+        Me.discountsCheck.UseVisualStyleBackColor = True
+        '
+        'clubCheck
+        '
+        Me.clubCheck.AutoSize = True
+        Me.clubCheck.Location = New System.Drawing.Point(21, 83)
+        Me.clubCheck.Name = "clubCheck"
+        Me.clubCheck.Size = New System.Drawing.Size(248, 33)
+        Me.clubCheck.TabIndex = 13
+        Me.clubCheck.TabStop = True
+        Me.clubCheck.Text = "Club Discount - 5%"
+        Me.clubCheck.UseVisualStyleBackColor = True
+        Me.clubCheck.Visible = False
+        '
+        'staffCheck
+        '
+        Me.staffCheck.AutoSize = True
+        Me.staffCheck.Location = New System.Drawing.Point(24, 126)
+        Me.staffCheck.Name = "staffCheck"
+        Me.staffCheck.Size = New System.Drawing.Size(258, 33)
+        Me.staffCheck.TabIndex = 12
+        Me.staffCheck.TabStop = True
+        Me.staffCheck.Text = "Staff Discount - 10%"
+        Me.staffCheck.UseVisualStyleBackColor = True
+        Me.staffCheck.Visible = False
+        '
         'otherDiscountTextBox
         '
-        Me.otherDiscountTextBox.Location = New System.Drawing.Point(14, 194)
-        Me.otherDiscountTextBox.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
+        Me.otherDiscountTextBox.Location = New System.Drawing.Point(24, 212)
+        Me.otherDiscountTextBox.Margin = New System.Windows.Forms.Padding(7)
         Me.otherDiscountTextBox.Name = "otherDiscountTextBox"
         Me.otherDiscountTextBox.ReadOnly = True
         Me.otherDiscountTextBox.Size = New System.Drawing.Size(228, 35)
         Me.otherDiscountTextBox.TabIndex = 10
-        '
-        'otherCheckBox
-        '
-        Me.otherCheckBox.AutoSize = True
-        Me.otherCheckBox.Location = New System.Drawing.Point(16, 152)
-        Me.otherCheckBox.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
-        Me.otherCheckBox.Name = "otherCheckBox"
-        Me.otherCheckBox.Size = New System.Drawing.Size(105, 33)
-        Me.otherCheckBox.TabIndex = 2
-        Me.otherCheckBox.Text = "Other"
-        Me.otherCheckBox.UseVisualStyleBackColor = True
-        '
-        'CheckBox2
-        '
-        Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.Location = New System.Drawing.Point(16, 98)
-        Me.CheckBox2.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
-        Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(167, 33)
-        Me.CheckBox2.TabIndex = 1
-        Me.CheckBox2.Text = "CheckBox2"
-        Me.CheckBox2.UseVisualStyleBackColor = True
-        '
-        'CheckBox1
-        '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(16, 45)
-        Me.CheckBox1.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(167, 33)
-        Me.CheckBox1.TabIndex = 0
-        Me.CheckBox1.Text = "CheckBox1"
-        Me.CheckBox1.UseVisualStyleBackColor = True
+        Me.otherDiscountTextBox.Visible = False
         '
         'GroupBox2
         '
@@ -293,9 +309,9 @@ Partial Class MainForm
         Me.GroupBox2.Controls.Add(Me.Label3)
         Me.GroupBox2.Controls.Add(Me.Label4)
         Me.GroupBox2.Location = New System.Drawing.Point(870, 558)
-        Me.GroupBox2.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
+        Me.GroupBox2.Margin = New System.Windows.Forms.Padding(7)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(7, 7, 7, 7)
+        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(7)
         Me.GroupBox2.Size = New System.Drawing.Size(467, 352)
         Me.GroupBox2.TabIndex = 9
         Me.GroupBox2.TabStop = False
@@ -304,7 +320,7 @@ Partial Class MainForm
         'totalLabel
         '
         Me.totalLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.totalLabel.Location = New System.Drawing.Point(168, 272)
+        Me.totalLabel.Location = New System.Drawing.Point(186, 270)
         Me.totalLabel.Margin = New System.Windows.Forms.Padding(7, 0, 7, 0)
         Me.totalLabel.Name = "totalLabel"
         Me.totalLabel.Size = New System.Drawing.Size(233, 51)
@@ -315,7 +331,7 @@ Partial Class MainForm
         'discountLabel
         '
         Me.discountLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.discountLabel.Location = New System.Drawing.Point(168, 196)
+        Me.discountLabel.Location = New System.Drawing.Point(186, 120)
         Me.discountLabel.Margin = New System.Windows.Forms.Padding(7, 0, 7, 0)
         Me.discountLabel.Name = "discountLabel"
         Me.discountLabel.Size = New System.Drawing.Size(233, 51)
@@ -326,7 +342,7 @@ Partial Class MainForm
         'taxLabel
         '
         Me.taxLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.taxLabel.Location = New System.Drawing.Point(168, 120)
+        Me.taxLabel.Location = New System.Drawing.Point(186, 195)
         Me.taxLabel.Margin = New System.Windows.Forms.Padding(7, 0, 7, 0)
         Me.taxLabel.Name = "taxLabel"
         Me.taxLabel.Size = New System.Drawing.Size(233, 51)
@@ -337,7 +353,7 @@ Partial Class MainForm
         'subTotalLabel
         '
         Me.subTotalLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.subTotalLabel.Location = New System.Drawing.Point(168, 45)
+        Me.subTotalLabel.Location = New System.Drawing.Point(186, 45)
         Me.subTotalLabel.Margin = New System.Windows.Forms.Padding(7, 0, 7, 0)
         Me.subTotalLabel.Name = "subTotalLabel"
         Me.subTotalLabel.Size = New System.Drawing.Size(233, 51)
@@ -348,7 +364,7 @@ Partial Class MainForm
         'loadButton
         '
         Me.loadButton.Location = New System.Drawing.Point(135, 676)
-        Me.loadButton.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
+        Me.loadButton.Margin = New System.Windows.Forms.Padding(7)
         Me.loadButton.Name = "loadButton"
         Me.loadButton.Size = New System.Drawing.Size(247, 51)
         Me.loadButton.TabIndex = 10
@@ -358,7 +374,7 @@ Partial Class MainForm
         'saveButton
         '
         Me.saveButton.Location = New System.Drawing.Point(135, 741)
-        Me.saveButton.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
+        Me.saveButton.Margin = New System.Windows.Forms.Padding(7)
         Me.saveButton.Name = "saveButton"
         Me.saveButton.Size = New System.Drawing.Size(247, 51)
         Me.saveButton.TabIndex = 10
@@ -368,17 +384,28 @@ Partial Class MainForm
         'testLabel
         '
         Me.testLabel.AutoSize = True
-        Me.testLabel.Location = New System.Drawing.Point(583, 51)
+        Me.testLabel.Location = New System.Drawing.Point(635, 48)
         Me.testLabel.Name = "testLabel"
-        Me.testLabel.Size = New System.Drawing.Size(86, 29)
+        Me.testLabel.Size = New System.Drawing.Size(57, 29)
         Me.testLabel.TabIndex = 11
-        Me.testLabel.Text = "Label7"
+        Me.testLabel.Text = "test "
+        '
+        'totalButton
+        '
+        Me.totalButton.Location = New System.Drawing.Point(583, 365)
+        Me.totalButton.Margin = New System.Windows.Forms.Padding(7)
+        Me.totalButton.Name = "totalButton"
+        Me.totalButton.Size = New System.Drawing.Size(175, 51)
+        Me.totalButton.TabIndex = 12
+        Me.totalButton.Text = "To&tal"
+        Me.totalButton.UseVisualStyleBackColor = True
         '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(14.0!, 29.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1468, 968)
+        Me.Controls.Add(Me.totalButton)
         Me.Controls.Add(Me.testLabel)
         Me.Controls.Add(Me.saveButton)
         Me.Controls.Add(Me.loadButton)
@@ -394,7 +421,7 @@ Partial Class MainForm
         Me.Controls.Add(Me.availableList)
         Me.Controls.Add(Me.addItemButton)
         Me.Controls.Add(Me.exitButton)
-        Me.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
+        Me.Margin = New System.Windows.Forms.Padding(7)
         Me.Name = "MainForm"
         Me.Text = "POS"
         Me.GroupBox1.ResumeLayout(False)
@@ -426,10 +453,6 @@ Partial Class MainForm
     Friend WithEvents Label5 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents otherDiscountTextBox As TextBox
-    Friend WithEvents otherCheckBox As CheckBox
-    Friend WithEvents CheckBox2 As CheckBox
-    Friend WithEvents CheckBox1 As CheckBox
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents loadButton As Button
     Friend WithEvents saveButton As Button
@@ -438,4 +461,10 @@ Partial Class MainForm
     Friend WithEvents taxLabel As Label
     Friend WithEvents subTotalLabel As Label
     Friend WithEvents testLabel As Label
+    Friend WithEvents otherCheck As CheckBox
+    Friend WithEvents discountsCheck As CheckBox
+    Friend WithEvents clubCheck As RadioButton
+    Friend WithEvents staffCheck As RadioButton
+    Friend WithEvents otherDiscountTextBox As TextBox
+    Friend WithEvents totalButton As Button
 End Class

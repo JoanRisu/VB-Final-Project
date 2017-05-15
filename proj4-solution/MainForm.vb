@@ -44,7 +44,7 @@ Public Class MainForm
         priceTitle = "Add item price"
         priceMessage = "Enter item price"
 
-        'Saves user inpu to itemName
+        'Saves user input to itemName
         itemName = InputBox(itemMessage, itemTitle, "Item" & counter)
         'Saves user input to itemPrice
         Double.TryParse(InputBox(priceMessage, priceTitle, "$0.00"), itemPrice)
@@ -72,6 +72,16 @@ Public Class MainForm
             MessageBoxButtons.OK,
             MessageBoxIcon.Exclamation,
             MessageBoxDefaultButton.Button1)
+
+            'This is to catch the final item error lists get when removing the final item.
+        ElseIf (availableList.Items.Count = 1) Then
+            MessageBox.Show("List cannot remove the last item, replace?", "List Empty",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Exclamation,
+            MessageBoxDefaultButton.Button1)
+
+            'create an independent sub procedure here.
+
             'If list is not empty upon clicking Delete Item
         Else
             'Gives error if no item is selected for deletion
@@ -80,7 +90,7 @@ Public Class MainForm
                 'If an item is selected, remove items at the index of the selected item
             Else
                 availableList.Items.RemoveAt(availableList.FocusedItem.Index)
-                pricesA.RemoveAt(pricesA.Count - 1)
+                pricesA.RemoveAt(availableList.FocusedItem.Index)
             End If
         End If
     End Sub

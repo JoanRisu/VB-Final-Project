@@ -44,7 +44,7 @@ Public Class MainForm
         priceTitle = "Add item price"
         priceMessage = "Enter item price"
 
-        'Saves user inpu to itemName
+        'Saves user input to itemName
         itemName = InputBox(itemMessage, itemTitle, "Item" & counter)
         'Saves user input to itemPrice
         Double.TryParse(InputBox(priceMessage, priceTitle, "$0.00"), itemPrice)
@@ -80,7 +80,7 @@ Public Class MainForm
             MessageBoxIcon.Exclamation,
             MessageBoxDefaultButton.Button1)
 
-            'we should use a class or function here to run the inputs and keep this code clean.
+            'create an independent sub procedure here.
 
             'If list is not empty upon clicking Delete Item
         Else

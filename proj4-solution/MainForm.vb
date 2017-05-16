@@ -29,10 +29,7 @@ Public Class MainForm
     Dim pricesA As New List(Of Double)
     Dim pricesO As New List(Of Double)
 
-    'Adds items to the availableItems list view using input boxes
-
-    Private Sub addItemButton_Click(sender As Object, e As EventArgs) Handles addItemButton.Click
-
+    Private Sub addinput(ByVal flag As Integer)
         'Saves preset messages and variables to hold user input
         Dim itemTitle, itemMessage, itemName As String
         Dim priceTitle, priceMessage As String
@@ -44,17 +41,34 @@ Public Class MainForm
         priceTitle = "Add item price"
         priceMessage = "Enter item price"
 
-        'Saves user input to itemName
-        itemName = InputBox(itemMessage, itemTitle, "Item" & counter)
-        'Saves user input to itemPrice
-        Double.TryParse(InputBox(priceMessage, priceTitle, "$0.00"), itemPrice)
+        If (flag = 0) Then
+            'Saves user input to itemName
+            itemName = InputBox(itemMessage, itemTitle, "Item" & counter)
+            'Saves user input to itemPrice
+            Double.TryParse(InputBox(priceMessage, priceTitle, "$0.00"), itemPrice)
 
-        'Adds itemName and itemPrice to availableList
-        availableList.Items.Add(itemName)
-        availableList.Items(counter).SubItems.Add(itemPrice.ToString("C02"))
+            'Adds itemName and itemPrice to availableList
+            availableList.Items.Add(itemName)
+            availableList.Items(counter).SubItems.Add(itemPrice.ToString("C02"))
 
-        'Adds itemPrice to list of doubles
-        pricesA.Add(itemPrice)
+            'Adds itemPrice to list of doubles
+            pricesA.Add(itemPrice)
+        ElseIf (flag = 1) Then
+            itemName = InputBox(itemMessage, itemTitle, "Item" & counter)
+            Double.TryParse(InputBox(priceMessage, priceTitle, "$0.00"), itemPrice)
+
+            availableList.Items(0).Text = itemName
+            availableList.Items(0).SubItems(1).Text = itemPrice.ToString("C02")
+            pricesA(0) = itemPrice
+
+        End If
+    End Sub
+
+    'Adds items to the availableItems list view using input boxes
+
+    Private Sub addItemButton_Click(sender As Object, e As EventArgs) Handles addItemButton.Click
+
+        addinput(0)
 
         'Updates counter
         counter = availableList.Items.Count
@@ -66,6 +80,8 @@ Public Class MainForm
     'Delete items from the availableItems list view
     Private Sub deleteItemButton_Click(sender As Object, e As EventArgs) Handles deleteItemButton.Click
 
+        Dim button As Integer
+
         'If list is empty, gives error message
         If (availableList.Items.Count = 0) Then
             MessageBox.Show("List is already empty!", "List Empty",
@@ -75,14 +91,17 @@ Public Class MainForm
 
             'This is to catch the final item error lists get when removing the final item.
         ElseIf (availableList.Items.Count = 1) Then
+            button =
             MessageBox.Show("List cannot remove the last item, replace?", "List Empty",
             MessageBoxButtons.YesNo,
             MessageBoxIcon.Exclamation,
             MessageBoxDefaultButton.Button1)
 
-            'create an independent sub procedure here.
+            If button = DialogResult.Yes Then
 
-            'If list is not empty upon clicking Delete Item
+                addinput(1)
+            End If
+
         Else
             'Gives error if no item is selected for deletion
             If availableList.FocusedItem Is Nothing Then
@@ -91,6 +110,7 @@ Public Class MainForm
             Else
                 availableList.Items.RemoveAt(availableList.FocusedItem.Index)
                 pricesA.RemoveAt(availableList.FocusedItem.Index)
+                counter = counter - 1
             End If
         End If
     End Sub
@@ -253,5 +273,9 @@ Public Class MainForm
             totalDisc = otherDiscount
         End If
         testLabel.Text = totalDisc.ToString
+    End Sub
+
+    Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs)
+
     End Sub
 End Class

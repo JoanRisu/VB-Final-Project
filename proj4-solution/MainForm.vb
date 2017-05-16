@@ -110,6 +110,7 @@ Public Class MainForm
             Else
                 availableList.Items.RemoveAt(availableList.FocusedItem.Index)
                 pricesA.RemoveAt(availableList.FocusedItem.Index)
+                counter = counter - 1
             End If
         End If
     End Sub
@@ -272,5 +273,9 @@ Public Class MainForm
             totalDisc = otherDiscount
         End If
         testLabel.Text = totalDisc.ToString
+    End Sub
+
+    Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs)
+
     End Sub
 End Class

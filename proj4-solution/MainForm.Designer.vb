@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class MainForm
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class MainForm
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.exitButton = New System.Windows.Forms.Button()
         Me.addItemButton = New System.Windows.Forms.Button()
@@ -231,7 +231,7 @@ Partial Class MainForm
         '
         Me.otherCheck.AutoSize = True
         Me.otherCheck.Location = New System.Drawing.Point(10, 76)
-        Me.otherCheck.Margin = New System.Windows.Forms.Padding(1, 1, 1, 1)
+        Me.otherCheck.Margin = New System.Windows.Forms.Padding(1)
         Me.otherCheck.Name = "otherCheck"
         Me.otherCheck.Size = New System.Drawing.Size(52, 17)
         Me.otherCheck.TabIndex = 16
@@ -243,7 +243,7 @@ Partial Class MainForm
         '
         Me.discountsCheck.AutoSize = True
         Me.discountsCheck.Location = New System.Drawing.Point(5, 18)
-        Me.discountsCheck.Margin = New System.Windows.Forms.Padding(1, 1, 1, 1)
+        Me.discountsCheck.Margin = New System.Windows.Forms.Padding(1)
         Me.discountsCheck.Name = "discountsCheck"
         Me.discountsCheck.Size = New System.Drawing.Size(73, 17)
         Me.discountsCheck.TabIndex = 15
@@ -254,7 +254,7 @@ Partial Class MainForm
         '
         Me.clubCheck.AutoSize = True
         Me.clubCheck.Location = New System.Drawing.Point(9, 37)
-        Me.clubCheck.Margin = New System.Windows.Forms.Padding(1, 1, 1, 1)
+        Me.clubCheck.Margin = New System.Windows.Forms.Padding(1)
         Me.clubCheck.Name = "clubCheck"
         Me.clubCheck.Size = New System.Drawing.Size(114, 17)
         Me.clubCheck.TabIndex = 13
@@ -267,7 +267,7 @@ Partial Class MainForm
         '
         Me.staffCheck.AutoSize = True
         Me.staffCheck.Location = New System.Drawing.Point(10, 56)
-        Me.staffCheck.Margin = New System.Windows.Forms.Padding(1, 1, 1, 1)
+        Me.staffCheck.Margin = New System.Windows.Forms.Padding(1)
         Me.staffCheck.Name = "staffCheck"
         Me.staffCheck.Size = New System.Drawing.Size(121, 17)
         Me.staffCheck.TabIndex = 12

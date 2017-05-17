@@ -7,20 +7,31 @@ Option Strict On
 Option Infer Off
 
 Public Class MainForm
+    'Structure for adding new items
+    Structure Item
+        Public name As String
+        Public price As Double
+    End Structure
+
 
     'Class level variables and constants for totals
-    Dim subtotal As Double
-    Dim taxTotal As Double
-    Dim discountTotalAmount As Double
-    Dim total As Double
+    Shared subtotal As Double
+    Shared taxTotal As Double
+    Shared discountTotalAmount As Double
+    Shared total As Double
 
     Const taxRate As Double = 0.08
 
     'Discount percentages
-    Dim totalDisc As Double
-    Dim otherDiscount As Double
+    Shared totalDisc As Double
+    Shared otherDiscount As Double
+
     Const staffDisc As Double = 10
     Const clubDisc As Double = 5
+
+    'This is the list file. It's going to store as a csv.
+    Const listFileName As String = "aList.csv"
+
 
     'Counter for index referencing
     Private counter As Integer
@@ -28,12 +39,64 @@ Public Class MainForm
     'Lists for holding prices for lists
     Dim pricesA As New List(Of Double)
     Dim pricesO As New List(Of Double)
+    Dim itemArray() As String
+
+    'These are for reading the .csv
+    Dim arrName() As String
+    Dim arrValue() As String
+
+    'sub proceedure for adding inputs
+    'Class for calculations
+    Public Class Calculator
+
+        Public Sub New()
+            MyBase.New()
+        End Sub
+
+        Public Sub New(ByVal totalDisc As Double,
+                       ByVal subtotal As Double,
+                       ByVal pricesO As List(Of Double))
+            totalDisc = totalDisc
+            subtotal = subtotal
+            pricesO = pricesO
+            taxTotal = taxTotal
+        End Sub
+
+        Public Function GetDiscount(ByVal totalDisc As Double,
+                                    ByVal subtotal As Double) As Double
+            'Discount calculation
+            discountTotalAmount = totalDisc * subtotal / 100
+            Return discountTotalAmount
+        End Function
+
+        Public Function GetSubtotal(ByVal pricesO As List(Of Double)) As Double
+            'Subtotal calculation
+            subtotal = pricesO.Sum
+            Return subtotal
+        End Function
+
+        Public Function GetTaxTotal(ByVal subtotal As Double,
+                                    ByVal discountTotalAmount As Double,
+                                    ByVal taxRate As Double) As Double
+            'Tax calculation
+            taxTotal = (subtotal - discountTotalAmount) * taxRate
+            Return taxTotal
+        End Function
+
+        Public Function GetTotal(ByVal subtotal As Double,
+                                 ByVal discountTotalAmount As Double,
+                                 ByVal taxTotal As Double) As Double
+            total = subtotal - discountTotalAmount + taxTotal
+            Return total
+        End Function
+
+    End Class
 
     Private Sub addinput(ByVal flag As Integer)
         'Saves preset messages and variables to hold user input
-        Dim itemTitle, itemMessage, itemName As String
+        Dim itemTitle, itemMessage As String
         Dim priceTitle, priceMessage As String
-        Dim itemPrice As Double
+        Dim userItem As Item
 
         'Message box presets
         itemTitle = "Add Item"
@@ -42,27 +105,31 @@ Public Class MainForm
         priceMessage = "Enter item price"
 
         If (flag = 0) Then
-            'Saves user input to itemName
-            itemName = InputBox(itemMessage, itemTitle, "Item" & counter)
+            'Saves user input to userItem.name
+            userItem.name = InputBox(itemMessage, itemTitle, "Item" & counter)
             'Saves user input to itemPrice
-            Double.TryParse(InputBox(priceMessage, priceTitle, "$0.00"), itemPrice)
+            Double.TryParse(InputBox(priceMessage, priceTitle, "$0.00"), userItem.price)
 
             'Adds itemName and itemPrice to availableList
-            availableList.Items.Add(itemName)
-            availableList.Items(counter).SubItems.Add(itemPrice.ToString("C02"))
+            availableList.Items.Add(userItem.name)
+            availableList.Items(counter).SubItems.Add(userItem.price.ToString("C02"))
 
             'Adds itemPrice to list of doubles
-            pricesA.Add(itemPrice)
+            pricesA.Add(userItem.price)
         ElseIf (flag = 1) Then
-            itemName = InputBox(itemMessage, itemTitle, "Item" & counter)
-            Double.TryParse(InputBox(priceMessage, priceTitle, "$0.00"), itemPrice)
+            userItem.name = InputBox(itemMessage, itemTitle, "Item" & counter)
+            Double.TryParse(InputBox(priceMessage, priceTitle, "$0.00"), userItem.price)
 
-            availableList.Items(0).Text = itemName
-            availableList.Items(0).SubItems(1).Text = itemPrice.ToString("C02")
-            pricesA(0) = itemPrice
+            availableList.Items(0).Text = userItem.name
+            availableList.Items(0).SubItems(1).Text = userItem.price.ToString("C02")
+            pricesA(0) = userItem.price
 
         End If
     End Sub
+
+
+
+
 
     'Adds items to the availableItems list view using input boxes
 
@@ -170,21 +237,20 @@ Public Class MainForm
     'Totals the values of subtotal, taxTotal, is discTotal and displays them in the appropriate labels
     Private Sub totalButton_Click(sender As Object, e As EventArgs) Handles totalButton.Click
 
+        'Instantiate Calculator
+        Dim myCalc As New Calculator
+
         'Subtotal calculation
-        subtotal = pricesO.Sum
-        subTotalLabel.Text = subtotal.ToString("C02")
+        subTotalLabel.Text = myCalc.GetSubtotal(pricesO).ToString("C02")
 
         'Discount calculation
-        discountTotalAmount = totalDisc * subtotal / 100
-        discountLabel.Text = "-" & discountTotalAmount.ToString("C2")
+        discountLabel.Text = "-" & myCalc.GetDiscount(totalDisc, subtotal).ToString("C2")
 
         'Tax calculation
-        taxTotal = (subtotal - discountTotalAmount) * taxRate
-        taxLabel.Text = taxTotal.ToString("C2")
+        taxLabel.Text = myCalc.GetTaxTotal(subtotal, discountTotalAmount, taxRate).ToString("C2")
 
         'Total calculation
-        total = subtotal - discountTotalAmount + taxTotal
-        totalLabel.Text = total.ToString("C2")
+        totalLabel.Text = myCalc.GetTotal(subtotal, discountTotalAmount, taxTotal).ToString("C2")
     End Sub
 
     'Close Application
@@ -193,15 +259,89 @@ Public Class MainForm
         Me.Close()
     End Sub
 
-    Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'Loads items to availableList from file
+    Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles Me.Load
+        Dim savedItem As Item
+
+        If IO.File.Exists(listFileName) Then
+            'Checks to see if the file actually exists. If it doesn't, it just starts the program.
+            Using fileReader As New FileIO.TextFieldParser(listFileName)
+                'Using disposes of resources once the code is done with this block. In this case, it gets rid of fileReader once everything is done.
+                'Because we are using csv, we need to use textfieldparser to look for delimiter ","
+                fileReader.TextFieldType = FileIO.FieldType.Delimited
+                fileReader.SetDelimiters(",")
+                fileReader.HasFieldsEnclosedInQuotes = True
+                Dim arrCurrentcolumn As String()
+                'The parser will use this array to determine which column it is in.
+                While Not fileReader.EndOfData
+
+
+                    arrCurrentcolumn = fileReader.ReadFields
+
+                    If arrName Is Nothing Then
+                        'This catches any Null exceptions from using the length of the array
+                        ReDim Preserve arrName(0)
+                        ReDim Preserve arrValue(0)
+
+                        arrName(0) = arrCurrentcolumn(0)
+                        arrValue(0) = arrCurrentcolumn(1)
+                    Else
+                        'The parser will start filling the two arrays here.
+                        ReDim Preserve arrName(arrName.Length)
+                        ReDim Preserve arrValue(arrValue.Length)
+                        arrName((arrName.Length - 1)) = arrCurrentcolumn(0)
+                        arrValue((arrValue.Length - 1)) = arrCurrentcolumn(1)
+                    End If
+                End While
+            End Using
+
+
+            For index As Integer = 0 To arrName.Length - 1
+                'This for loop will run until it hits the last index of arrName
+                savedItem.name = arrName(index)
+                arrValue(index) = arrValue(index).ToString.Replace("$", String.Empty) 'Strips away the $, allowing us to use tryparse on the string immediately.
+                Double.TryParse(arrValue(index), savedItem.price)
+
+                availableList.Items.Add(savedItem.name)
+                pricesA.Add(savedItem.price)
+                availableList.Items(index).SubItems.Add(savedItem.price.ToString("C02"))
+
+
+            Next index
+            availableList.Items.RemoveAt(0)
+            pricesA.RemoveAt(0)
+            'Because the save file also has a title row for naming the columns, we have to remove the first index in the list.
+        End If
+        'The lines below updates the counter.
+        counter = availableList.Items.Count
+        testLabel.Text = counter.ToString 'debugging
+    End Sub
+    'When the user closes the form, the form will save their progress.
+    Private Sub MainForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        If (counter = 0) Then
+            'This stops the savefile code if the counter is zero.
+        Else
+            ReDim itemArray(counter - 1)
+            'This allows us to dynamically change the number of elements in our array
+
+            'The code below adds the items to the array above for storage.
+            For index As Integer = 0 To counter - 1
+                itemArray(index) = availableList.Items(index).Text & "," & availableList.Items(index).SubItems(1).Text
+            Next index
+
+            Dim outFile As System.IO.StreamWriter
+            outFile = IO.File.CreateText(listFileName)
+            Dim columnTitles As String = "Item Name,Price"
+            'Adding column titles in case the user wants to edit these files manually in a spreadsheet
+            outFile.WriteLine(columnTitles)
+            For Each member As String In itemArray
+                outFile.WriteLine(member)
+            Next member
+            outFile.Close()
+        End If
+
+
     End Sub
 
-    Private Sub saveButton_Click(sender As Object, e As EventArgs) Handles saveButton.Click
-        Dim itemCount As Integer = availableList.Items.Count
-        Dim itemArray(itemCount - 1, 0) As String
-        'This array is for the save files. We can recreate the array every time by limiting the scope to the save button.
-    End Sub
 
     'Check that allows user to input a custom discount percentage that is added to existing discounts
     Private Sub otherCheck_CheckedChanged_1(sender As Object, e As EventArgs) Handles otherCheck.CheckedChanged
@@ -209,9 +349,12 @@ Public Class MainForm
         If otherCheck.Checked = False Then
             otherDiscountTextBox.Visible = False
             otherDiscountTextBox.Text = ""
+            discountsGroupBox.Height = 95
         ElseIf otherCheck.Checked = True Then
             otherDiscountTextBox.Visible = True
             otherDiscountTextBox.Text = ""
+            discountsGroupBox.Height = 122
+
         End If
     End Sub
 
@@ -220,6 +363,7 @@ Public Class MainForm
 
         'If unchecked, discount options are unavailable
         If discountsCheck.Checked = False Then
+            discountsGroupBox.Height = 38
             clubCheck.Visible = False
             clubCheck.Checked = False
             staffCheck.Visible = False
@@ -229,6 +373,7 @@ Public Class MainForm
             Label2.Text = "Discount: "
             'If checked, discount options are available
         ElseIf discountsCheck.Checked = True Then
+            discountsGroupBox.Height = 95
             clubCheck.Visible = True
             staffCheck.Visible = True
             otherCheck.Visible = True
@@ -275,7 +420,5 @@ Public Class MainForm
         testLabel.Text = totalDisc.ToString
     End Sub
 
-    Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs)
 
-    End Sub
 End Class

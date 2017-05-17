@@ -22,13 +22,19 @@ Public Class MainForm
     Const staffDisc As Double = 10
     Const clubDisc As Double = 5
 
+    'This is the list file. It's going to store as a csv.
+    Const listFileName As String = "aList.csv"
+
+
     'Counter for index referencing
     Private counter As Integer
 
     'Lists for holding prices for lists
     Dim pricesA As New List(Of Double)
     Dim pricesO As New List(Of Double)
+    Dim itemArray() As String
 
+    'sub proceedure for adding inputs
     Private Sub addinput(ByVal flag As Integer)
         'Saves preset messages and variables to hold user input
         Dim itemTitle, itemMessage, itemName As String
@@ -63,6 +69,10 @@ Public Class MainForm
 
         End If
     End Sub
+
+
+
+
 
     'Adds items to the availableItems list view using input boxes
 
@@ -198,8 +208,24 @@ Public Class MainForm
     End Sub
 
     Private Sub saveButton_Click(sender As Object, e As EventArgs) Handles saveButton.Click
-        Dim itemCount As Integer = availableList.Items.Count
-        Dim itemArray(itemCount - 1, 0) As String
+        ReDim itemArray(counter - 1)
+
+        For index As Integer = 0 To counter - 1
+            itemArray(index) = availableList.Items(index).Text & "," & availableList.Items(index).SubItems(1).Text
+        Next index
+
+        'temporary until I get the structure from scott
+
+        Dim outFile As System.IO.StreamWriter
+        outFile = IO.File.CreateText(listFileName)
+        Dim columnTitles As String = "Item Name,Price"
+
+        outFile.WriteLine(columnTitles)
+        For Each member As String In itemArray
+            outFile.WriteLine(member)
+        Next member
+        outFile.Close()
+
         'This array is for the save files. We can recreate the array every time by limiting the scope to the save button.
     End Sub
 

@@ -8,17 +8,27 @@ Option Infer Off
 
 Public Class MainForm
 
+    'Structure for adding new items
+    Structure Item
+        Public name As String
+        Public price As Double
+    End Structure
+
+    Dim itemArray() As String
+    Const listFileName As String = "aList.csv"
+
     'Class level variables and constants for totals
-    Dim subtotal As Double
-    Dim taxTotal As Double
-    Dim discountTotalAmount As Double
-    Dim total As Double
+    Shared subtotal As Double
+    Shared taxTotal As Double
+    Shared discountTotalAmount As Double
+    Shared total As Double
 
     Const taxRate As Double = 0.08
 
     'Discount percentages
-    Dim totalDisc As Double
-    Dim otherDiscount As Double
+    Shared totalDisc As Double
+    Shared otherDiscount As Double
+
     Const staffDisc As Double = 10
     Const clubDisc As Double = 5
 
@@ -29,11 +39,56 @@ Public Class MainForm
     Dim pricesA As New List(Of Double)
     Dim pricesO As New List(Of Double)
 
+    'Class for calculations
+    Public Class Calculator
+
+        Public Sub New()
+            MyBase.New()
+        End Sub
+
+        Public Sub New(ByVal totalDisc As Double,
+                       ByVal subtotal As Double,
+                       ByVal pricesO As List(Of Double))
+            totalDisc = totalDisc
+            subtotal = subtotal
+            pricesO = pricesO
+            taxTotal = taxTotal
+        End Sub
+
+        Public Function GetDiscount(ByVal totalDisc As Double,
+                                    ByVal subtotal As Double) As Double
+            'Discount calculation
+            discountTotalAmount = totalDisc * subtotal / 100
+            Return discountTotalAmount
+        End Function
+
+        Public Function GetSubtotal(ByVal pricesO As List(Of Double)) As Double
+            'Subtotal calculation
+            subtotal = pricesO.Sum
+            Return subtotal
+        End Function
+
+        Public Function GetTaxTotal(ByVal subtotal As Double,
+                                    ByVal discountTotalAmount As Double,
+                                    ByVal taxRate As Double) As Double
+            'Tax calculation
+            taxTotal = (subtotal - discountTotalAmount) * taxRate
+            Return taxTotal
+        End Function
+
+        Public Function GetTotal(ByVal subtotal As Double,
+                                 ByVal discountTotalAmount As Double,
+                                 ByVal taxTotal As Double) As Double
+            total = subtotal - discountTotalAmount + taxTotal
+            Return total
+        End Function
+
+    End Class
+
     Private Sub addinput(ByVal flag As Integer)
         'Saves preset messages and variables to hold user input
-        Dim itemTitle, itemMessage, itemName As String
+        Dim itemTitle, itemMessage As String
         Dim priceTitle, priceMessage As String
-        Dim itemPrice As Double
 
         'Message box presets
         itemTitle = "Add Item"
@@ -42,24 +97,28 @@ Public Class MainForm
         priceMessage = "Enter item price"
 
         If (flag = 0) Then
-            'Saves user input to itemName
-            itemName = InputBox(itemMessage, itemTitle, "Item" & counter)
+            'Declare new Item
+            Dim userItem As Item
+            'Saves user input to userItem.name
+            userItem.name = InputBox(itemMessage, itemTitle, "Item" & counter)
             'Saves user input to itemPrice
-            Double.TryParse(InputBox(priceMessage, priceTitle, "$0.00"), itemPrice)
+            Double.TryParse(InputBox(priceMessage, priceTitle, "$0.00"), userItem.price)
 
             'Adds itemName and itemPrice to availableList
-            availableList.Items.Add(itemName)
-            availableList.Items(counter).SubItems.Add(itemPrice.ToString("C02"))
+            availableList.Items.Add(userItem.name)
+            availableList.Items(counter).SubItems.Add(userItem.price.ToString("C02"))
 
             'Adds itemPrice to list of doubles
-            pricesA.Add(itemPrice)
+            pricesA.Add(userItem.price)
         ElseIf (flag = 1) Then
-            itemName = InputBox(itemMessage, itemTitle, "Item" & counter)
-            Double.TryParse(InputBox(priceMessage, priceTitle, "$0.00"), itemPrice)
+            'Declare new Item
+            Dim userItem As Item
+            userItem.name = InputBox(itemMessage, itemTitle, "Item" & counter)
+            Double.TryParse(InputBox(priceMessage, priceTitle, "$0.00"), userItem.price)
 
-            availableList.Items(0).Text = itemName
-            availableList.Items(0).SubItems(1).Text = itemPrice.ToString("C02")
-            pricesA(0) = itemPrice
+            availableList.Items(0).Text = userItem.name
+            availableList.Items(0).SubItems(1).Text = userItem.price.ToString("C02")
+            pricesA(0) = userItem.price
 
         End If
     End Sub
@@ -170,21 +229,20 @@ Public Class MainForm
     'Totals the values of subtotal, taxTotal, is discTotal and displays them in the appropriate labels
     Private Sub totalButton_Click(sender As Object, e As EventArgs) Handles totalButton.Click
 
+        'Instantiate Calculator
+        Dim myCalc As New Calculator
+
         'Subtotal calculation
-        subtotal = pricesO.Sum
-        subTotalLabel.Text = subtotal.ToString("C02")
+        subTotalLabel.Text = myCalc.GetSubtotal(pricesO).ToString("C02")
 
         'Discount calculation
-        discountTotalAmount = totalDisc * subtotal / 100
-        discountLabel.Text = "-" & discountTotalAmount.ToString("C2")
+        discountLabel.Text = "-" & myCalc.GetDiscount(totalDisc, subtotal).ToString("C2")
 
         'Tax calculation
-        taxTotal = (subtotal - discountTotalAmount) * taxRate
-        taxLabel.Text = taxTotal.ToString("C2")
+        taxLabel.Text = myCalc.GetTaxTotal(subtotal, discountTotalAmount, taxRate).ToString("C2")
 
         'Total calculation
-        total = subtotal - discountTotalAmount + taxTotal
-        totalLabel.Text = total.ToString("C2")
+        totalLabel.Text = myCalc.GetTotal(subtotal, discountTotalAmount, taxTotal).ToString("C2")
     End Sub
 
     'Close Application
@@ -197,10 +255,24 @@ Public Class MainForm
         'Loads items to availableList from file
     End Sub
 
-    Private Sub saveButton_Click(sender As Object, e As EventArgs) Handles saveButton.Click
-        Dim itemCount As Integer = availableList.Items.Count
-        Dim itemArray(itemCount - 1, 0) As String
-        'This array is for the save files. We can recreate the array every time by limiting the scope to the save button.
+    Private Sub MainForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        ReDim itemArray(counter - 1)
+
+        For index As Integer = 0 To counter - 1
+            itemArray(index) = availableList.Items(index).Text & "," & availableList.Items(index).SubItems(1).Text
+        Next index
+
+        'temporary until I get the structure from scott
+
+        Dim outFile As System.IO.StreamWriter
+        outFile = IO.File.CreateText(listFileName)
+        Dim columnTitles As String = "Item Name,Price"
+
+        outFile.WriteLine(columnTitles)
+        For Each member As String In itemArray
+            outFile.WriteLine(member)
+        Next member
+        outFile.Close()
     End Sub
 
     'Check that allows user to input a custom discount percentage that is added to existing discounts
@@ -276,6 +348,10 @@ Public Class MainForm
     End Sub
 
     Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub orderList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles orderList.SelectedIndexChanged
 
     End Sub
 End Class

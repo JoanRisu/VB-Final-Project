@@ -204,10 +204,25 @@ Public Class MainForm
     End Sub
 
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'Loads items to availableList from file
+
+        If IO.File.Exists("listFileName") Then
+            Using ioReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(listFileName)
+
+                ioReader.TextFieldType = FileIO.FieldType.Delimited
+                ioReader.SetDelimiters(",")
+
+                While Not ioReader.EndOfData
+
+
+
+                End While
+            End Using
+        End If
+
     End Sub
 
-    Private Sub saveButton_Click(sender As Object, e As EventArgs) Handles saveButton.Click
+
+    Private Sub MainForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         ReDim itemArray(counter - 1)
 
         For index As Integer = 0 To counter - 1
@@ -225,9 +240,8 @@ Public Class MainForm
             outFile.WriteLine(member)
         Next member
         outFile.Close()
-
-        'This array is for the save files. We can recreate the array every time by limiting the scope to the save button.
     End Sub
+
 
     'Check that allows user to input a custom discount percentage that is added to existing discounts
     Private Sub otherCheck_CheckedChanged_1(sender As Object, e As EventArgs) Handles otherCheck.CheckedChanged

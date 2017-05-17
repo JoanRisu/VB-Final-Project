@@ -7,7 +7,6 @@ Option Strict On
 Option Infer Off
 
 Public Class MainForm
-
     'Structure for adding new items
     Structure Item
         Public name As String
@@ -42,6 +41,9 @@ Public Class MainForm
     Dim pricesO As New List(Of Double)
     Dim itemArray() As String
 
+    'These are for reading the .csv
+    Dim arrName() As String
+    Dim arrValue() As String
 
     'sub proceedure for adding inputs
     'Class for calculations
@@ -94,6 +96,7 @@ Public Class MainForm
         'Saves preset messages and variables to hold user input
         Dim itemTitle, itemMessage As String
         Dim priceTitle, priceMessage As String
+        Dim userItem As Item
 
         'Message box presets
         itemTitle = "Add Item"
@@ -102,8 +105,6 @@ Public Class MainForm
         priceMessage = "Enter item price"
 
         If (flag = 0) Then
-            'Declare new Item
-            Dim userItem As Item
             'Saves user input to userItem.name
             userItem.name = InputBox(itemMessage, itemTitle, "Item" & counter)
             'Saves user input to itemPrice
@@ -116,8 +117,6 @@ Public Class MainForm
             'Adds itemPrice to list of doubles
             pricesA.Add(userItem.price)
         ElseIf (flag = 1) Then
-            'Declare new Item
-            Dim userItem As Item
             userItem.name = InputBox(itemMessage, itemTitle, "Item" & counter)
             Double.TryParse(InputBox(priceMessage, priceTitle, "$0.00"), userItem.price)
 
@@ -260,41 +259,87 @@ Public Class MainForm
         Me.Close()
     End Sub
 
-    Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles Me.Load
+        Dim savedItem As Item
 
-        If IO.File.Exists("listFileName") Then
-            Using ioReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(listFileName)
+        If IO.File.Exists(listFileName) Then
+            'Checks to see if the file actually exists. If it doesn't, it just starts the program.
+            Using fileReader As New FileIO.TextFieldParser(listFileName)
+                'Using disposes of resources once the code is done with this block. In this case, it gets rid of fileReader once everything is done.
+                'Because we are using csv, we need to use textfieldparser to look for delimiter ","
+                fileReader.TextFieldType = FileIO.FieldType.Delimited
+                fileReader.SetDelimiters(",")
+                fileReader.HasFieldsEnclosedInQuotes = True
+                Dim arrCurrentcolumn As String()
+                'The parser will use this array to determine which column it is in.
+                While Not fileReader.EndOfData
 
-                ioReader.TextFieldType = FileIO.FieldType.Delimited
-                ioReader.SetDelimiters(",")
 
-                While Not ioReader.EndOfData
+                    arrCurrentcolumn = fileReader.ReadFields
 
+                    If arrName Is Nothing Then
+                        'This catches any Null exceptions from using the length of the array
+                        ReDim Preserve arrName(0)
+                        ReDim Preserve arrValue(0)
 
-
+                        arrName(0) = arrCurrentcolumn(0)
+                        arrValue(0) = arrCurrentcolumn(1)
+                    Else
+                        'The parser will start filling the two arrays here.
+                        ReDim Preserve arrName(arrName.Length)
+                        ReDim Preserve arrValue(arrValue.Length)
+                        arrName((arrName.Length - 1)) = arrCurrentcolumn(0)
+                        arrValue((arrValue.Length - 1)) = arrCurrentcolumn(1)
+                    End If
                 End While
             End Using
+
+
+            For index As Integer = 0 To arrName.Length - 1
+                'This for loop will run until it hits the last index of arrName
+                savedItem.name = arrName(index)
+                arrValue(index) = arrValue(index).ToString.Replace("$", String.Empty) 'Strips away the $, allowing us to use tryparse on the string immediately.
+                Double.TryParse(arrValue(index), savedItem.price)
+
+                availableList.Items.Add(savedItem.name)
+                pricesA.Add(savedItem.price)
+                availableList.Items(index).SubItems.Add(savedItem.price.ToString("C02"))
+
+
+            Next index
+            availableList.Items.RemoveAt(0)
+            pricesA.RemoveAt(0)
+            'Because the save file also has a title row for naming the columns, we have to remove the first index in the list.
+        End If
+        'The lines below updates the counter.
+        counter = availableList.Items.Count
+        testLabel.Text = counter.ToString 'debugging
+    End Sub
+    'When the user closes the form, the form will save their progress.
+    Private Sub MainForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        If (counter = 0) Then
+            'This stops the savefile code if the counter is zero.
+        Else
+            ReDim itemArray(counter - 1)
+            'This allows us to dynamically change the number of elements in our array
+
+            'The code below adds the items to the array above for storage.
+            For index As Integer = 0 To counter - 1
+                itemArray(index) = availableList.Items(index).Text & "," & availableList.Items(index).SubItems(1).Text
+            Next index
+
+            Dim outFile As System.IO.StreamWriter
+            outFile = IO.File.CreateText(listFileName)
+            Dim columnTitles As String = "Item Name,Price"
+            'Adding column titles in case the user wants to edit these files manually in a spreadsheet
+            outFile.WriteLine(columnTitles)
+            For Each member As String In itemArray
+                outFile.WriteLine(member)
+            Next member
+            outFile.Close()
         End If
 
-    End Sub
-    Private Sub MainForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        ReDim itemArray(counter - 1)
 
-        For index As Integer = 0 To counter - 1
-            itemArray(index) = availableList.Items(index).Text & "," & availableList.Items(index).SubItems(1).Text
-        Next index
-
-        'temporary until I get the structure from scott
-
-        Dim outFile As System.IO.StreamWriter
-        outFile = IO.File.CreateText(listFileName)
-        Dim columnTitles As String = "Item Name,Price"
-
-        outFile.WriteLine(columnTitles)
-        For Each member As String In itemArray
-            outFile.WriteLine(member)
-        Next member
-        outFile.Close()
     End Sub
 
 
@@ -304,9 +349,12 @@ Public Class MainForm
         If otherCheck.Checked = False Then
             otherDiscountTextBox.Visible = False
             otherDiscountTextBox.Text = ""
+            discountsGroupBox.Height = 95
         ElseIf otherCheck.Checked = True Then
             otherDiscountTextBox.Visible = True
             otherDiscountTextBox.Text = ""
+            discountsGroupBox.Height = 122
+
         End If
     End Sub
 
@@ -315,6 +363,7 @@ Public Class MainForm
 
         'If unchecked, discount options are unavailable
         If discountsCheck.Checked = False Then
+            discountsGroupBox.Height = 38
             clubCheck.Visible = False
             clubCheck.Checked = False
             staffCheck.Visible = False
@@ -324,6 +373,7 @@ Public Class MainForm
             Label2.Text = "Discount: "
             'If checked, discount options are available
         ElseIf discountsCheck.Checked = True Then
+            discountsGroupBox.Height = 95
             clubCheck.Visible = True
             staffCheck.Visible = True
             otherCheck.Visible = True
@@ -370,11 +420,7 @@ Public Class MainForm
         testLabel.Text = totalDisc.ToString
     End Sub
 
-    Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub orderList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles orderList.SelectedIndexChanged
+    Private Sub printButton_Click(sender As Object, e As EventArgs)
 
     End Sub
 End Class

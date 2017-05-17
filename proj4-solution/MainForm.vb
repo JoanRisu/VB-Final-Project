@@ -420,7 +420,5 @@ Public Class MainForm
         testLabel.Text = totalDisc.ToString
     End Sub
 
-    Private Sub printButton_Click(sender As Object, e As EventArgs)
 
-    End Sub
 End Class

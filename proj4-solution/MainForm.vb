@@ -134,7 +134,7 @@ Public Class MainForm
                 MessageBoxIcon.Exclamation,
                 MessageBoxDefaultButton.Button1)
             Else
-                Double.TryParse(InputBox(priceMessage, priceTitle, "$0.00"), userItem.price)
+                Double.TryParse(price, userItem.price)
 
                 availableListView.Items(0).Text = userItem.name
                 availableListView.Items(0).SubItems(1).Text = userItem.price.ToString("C02")
@@ -267,6 +267,20 @@ Public Class MainForm
 
         'Total calculation
         totalLabel.Text = myCalc.GetTotal(subtotal, discountTotalAmount, taxTotal).ToString("C2")
+
+        Dim count As Integer = 1
+        Do While count <= 10
+            If dollarPictureBox.Visible = False Then
+                dollarPictureBox.Visible = True
+            Else
+                dollarPictureBox.Visible = False
+            End If
+            Me.Refresh()
+            System.Threading.Thread.Sleep(200)
+            count += 1
+
+        Loop
+
     End Sub
 
     'Close Application
@@ -439,4 +453,5 @@ Public Class MainForm
     Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
         Me.Close()
     End Sub
+
 End Class

@@ -97,6 +97,7 @@ Public Class MainForm
         Dim itemTitle, itemMessage As String
         Dim priceTitle, priceMessage As String
         Dim userItem As Item
+        Dim price As String
 
         'Message box presets
         itemTitle = "Add Item"
@@ -108,22 +109,37 @@ Public Class MainForm
             'Saves user input to userItem.name
             userItem.name = InputBox(itemMessage, itemTitle, "Item" & counter)
             'Saves user input to itemPrice
-            Double.TryParse(InputBox(priceMessage, priceTitle, "$0.00"), userItem.price)
+            price = InputBox(priceMessage, priceTitle, "$0.00")
+            If price Like "*[a-zA-Z]*" Then
+                MessageBox.Show("You cannot use letters!", "Error!",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Exclamation,
+                MessageBoxDefaultButton.Button1)
+            Else
+                Double.TryParse(price, userItem.price)
+                'Adds itemName and itemPrice to availableList
+                availableListView.Items.Add(userItem.name)
+                availableListView.Items(counter).SubItems.Add(userItem.price.ToString("C02"))
 
-            'Adds itemName and itemPrice to availableList
-            availableList.Items.Add(userItem.name)
-            availableList.Items(counter).SubItems.Add(userItem.price.ToString("C02"))
+                'Adds itemPrice to list of doubles
+                pricesA.Add(userItem.price)
+            End If
 
-            'Adds itemPrice to list of doubles
-            pricesA.Add(userItem.price)
         ElseIf (flag = 1) Then
             userItem.name = InputBox(itemMessage, itemTitle, "Item" & counter)
-            Double.TryParse(InputBox(priceMessage, priceTitle, "$0.00"), userItem.price)
+            price = InputBox(priceMessage, priceTitle, "$0.00")
+            If price Like "*[a-zA-Z]*" Then
+                MessageBox.Show("You cannot use letters!", "Error!",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Exclamation,
+                MessageBoxDefaultButton.Button1)
+            Else
+                Double.TryParse(InputBox(priceMessage, priceTitle, "$0.00"), userItem.price)
 
-            availableList.Items(0).Text = userItem.name
-            availableList.Items(0).SubItems(1).Text = userItem.price.ToString("C02")
-            pricesA(0) = userItem.price
-
+                availableListView.Items(0).Text = userItem.name
+                availableListView.Items(0).SubItems(1).Text = userItem.price.ToString("C02")
+                pricesA(0) = userItem.price
+            End If
         End If
     End Sub
 
@@ -138,7 +154,7 @@ Public Class MainForm
         addinput(0)
 
         'Updates counter
-        counter = availableList.Items.Count
+        counter = availableListView.Items.Count
 
         'Used to confirm counter is working properly
         testLabel.Text = counter.ToString
@@ -150,14 +166,14 @@ Public Class MainForm
         Dim button As Integer
 
         'If list is empty, gives error message
-        If (availableList.Items.Count = 0) Then
+        If (availableListView.Items.Count = 0) Then
             MessageBox.Show("List is already empty!", "List Empty",
             MessageBoxButtons.OK,
             MessageBoxIcon.Exclamation,
             MessageBoxDefaultButton.Button1)
 
             'This is to catch the final item error lists get when removing the final item.
-        ElseIf (availableList.Items.Count = 1) Then
+        ElseIf (availableListView.Items.Count = 1) Then
             button =
             MessageBox.Show("List cannot remove the last item, replace?", "List Empty",
             MessageBoxButtons.YesNo,
@@ -171,12 +187,12 @@ Public Class MainForm
 
         Else
             'Gives error if no item is selected for deletion
-            If availableList.FocusedItem Is Nothing Then
+            If availableListView.FocusedItem Is Nothing Then
                 MessageBox.Show("Please select an item to be deleted.", "Select an Item", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                 'If an item is selected, remove items at the index of the selected item
             Else
-                availableList.Items.RemoveAt(availableList.FocusedItem.Index)
-                pricesA.RemoveAt(availableList.FocusedItem.Index)
+                availableListView.Items.RemoveAt(availableListView.FocusedItem.Index)
+                pricesA.RemoveAt(availableListView.FocusedItem.Index)
                 counter = counter - 1
             End If
         End If
@@ -186,8 +202,8 @@ Public Class MainForm
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
 
         'Variables to hold current number of items and reference the name of the items coming from availableList
-        Dim count As Integer = orderList.Items.Count
-        Dim itemListName As ListViewItem = availableList.FocusedItem
+        Dim count As Integer = orderListView.Items.Count
+        Dim itemListName As ListViewItem = availableListView.FocusedItem
 
         'Checks that an item is selected to be added to orderList
         If itemListName Is Nothing Then
@@ -195,8 +211,8 @@ Public Class MainForm
             'If an item is selected in availableList
         Else
             'Adds item name and item price to orderList from availableList and adds the prices from orderList to a list of doubles
-            orderList.Items.Add(itemListName.Text)
-            orderList.Items(count).SubItems.Add(availableList.Items(itemListName.Index).SubItems(1).Text)
+            orderListView.Items.Add(itemListName.Text)
+            orderListView.Items(count).SubItems.Add(availableListView.Items(itemListName.Index).SubItems(1).Text)
             pricesO.Add(pricesA(itemListName.Index))
         End If
     End Sub
@@ -205,10 +221,10 @@ Public Class MainForm
     Private Sub removeButton_Click(sender As Object, e As EventArgs) Handles removeButton.Click
 
         'Variables to reference the name of the item being deleted
-        Dim itemListName As ListViewItem = orderList.FocusedItem
+        Dim itemListName As ListViewItem = orderListView.FocusedItem
 
         'If list is already empty
-        If orderList.Items.Count = 0 Then
+        If orderListView.Items.Count = 0 Then
             MessageBox.Show("Your order list is already empty!", "Order Empty", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             'If no item is selected in orderList
         ElseIf itemListName Is Nothing Then
@@ -219,7 +235,7 @@ Public Class MainForm
             Dim orderIndex As Integer = itemListName.Index
 
             'Removes item at index of selected item
-            orderList.Items.RemoveAt(orderIndex)
+            orderListView.Items.RemoveAt(orderIndex)
             pricesO.RemoveAt(orderIndex)
         End If
     End Sub
@@ -227,7 +243,7 @@ Public Class MainForm
     'Clears all values from orderList and pricesO as well as the totals
     Private Sub clearButton_Click(sender As Object, e As EventArgs) Handles clearButton.Click
 
-        orderList.Items.Clear()
+        orderListView.Items.Clear()
         pricesO.Clear()
         subtotal = 0
         taxTotal = 0
@@ -301,18 +317,18 @@ Public Class MainForm
                 arrValue(index) = arrValue(index).ToString.Replace("$", String.Empty) 'Strips away the $, allowing us to use tryparse on the string immediately.
                 Double.TryParse(arrValue(index), savedItem.price)
 
-                availableList.Items.Add(savedItem.name)
+                availableListView.Items.Add(savedItem.name)
                 pricesA.Add(savedItem.price)
-                availableList.Items(index).SubItems.Add(savedItem.price.ToString("C02"))
+                availableListView.Items(index).SubItems.Add(savedItem.price.ToString("C02"))
 
 
             Next index
-            availableList.Items.RemoveAt(0)
+            availableListView.Items.RemoveAt(0)
             pricesA.RemoveAt(0)
             'Because the save file also has a title row for naming the columns, we have to remove the first index in the list.
         End If
         'The lines below updates the counter.
-        counter = availableList.Items.Count
+        counter = availableListView.Items.Count
         testLabel.Text = counter.ToString 'debugging
     End Sub
     'When the user closes the form, the form will save their progress.
@@ -325,7 +341,7 @@ Public Class MainForm
 
             'The code below adds the items to the array above for storage.
             For index As Integer = 0 To counter - 1
-                itemArray(index) = availableList.Items(index).Text & "," & availableList.Items(index).SubItems(1).Text
+                itemArray(index) = availableListView.Items(index).Text & "," & availableListView.Items(index).SubItems(1).Text
             Next index
 
             Dim outFile As System.IO.StreamWriter
@@ -420,5 +436,7 @@ Public Class MainForm
         testLabel.Text = totalDisc.ToString
     End Sub
 
-
+    Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
+        Me.Close()
+    End Sub
 End Class

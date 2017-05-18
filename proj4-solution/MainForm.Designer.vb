@@ -24,13 +24,13 @@ Partial Class MainForm
     Private Sub InitializeComponent()
         Me.exitButton = New System.Windows.Forms.Button()
         Me.addItemButton = New System.Windows.Forms.Button()
-        Me.availableList = New System.Windows.Forms.ListView()
+        Me.availableListView = New System.Windows.Forms.ListView()
         Me.itemCHeader = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.priceCHeader = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.deleteItemButton = New System.Windows.Forms.Button()
         Me.addButton = New System.Windows.Forms.Button()
         Me.removeButton = New System.Windows.Forms.Button()
-        Me.orderList = New System.Windows.Forms.ListView()
+        Me.orderListView = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Label1 = New System.Windows.Forms.Label()
@@ -54,8 +54,16 @@ Partial Class MainForm
         Me.testLabel = New System.Windows.Forms.Label()
         Me.totalButton = New System.Windows.Forms.Button()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.fileMenu = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.discountsGroupBox.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.MenuStrip1.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'exitButton
@@ -76,15 +84,15 @@ Partial Class MainForm
         Me.addItemButton.Text = "Add &List Item"
         Me.addItemButton.UseVisualStyleBackColor = True
         '
-        'availableList
+        'availableListView
         '
-        Me.availableList.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.itemCHeader, Me.priceCHeader})
-        Me.availableList.Location = New System.Drawing.Point(14, 58)
-        Me.availableList.Name = "availableList"
-        Me.availableList.Size = New System.Drawing.Size(232, 181)
-        Me.availableList.TabIndex = 1
-        Me.availableList.UseCompatibleStateImageBehavior = False
-        Me.availableList.View = System.Windows.Forms.View.Details
+        Me.availableListView.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.itemCHeader, Me.priceCHeader})
+        Me.availableListView.Location = New System.Drawing.Point(14, 58)
+        Me.availableListView.Name = "availableListView"
+        Me.availableListView.Size = New System.Drawing.Size(232, 181)
+        Me.availableListView.TabIndex = 1
+        Me.availableListView.UseCompatibleStateImageBehavior = False
+        Me.availableListView.View = System.Windows.Forms.View.Details
         '
         'itemCHeader
         '
@@ -123,15 +131,15 @@ Partial Class MainForm
         Me.removeButton.Text = "&Remove"
         Me.removeButton.UseVisualStyleBackColor = True
         '
-        'orderList
+        'orderListView
         '
-        Me.orderList.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
-        Me.orderList.Location = New System.Drawing.Point(332, 58)
-        Me.orderList.Name = "orderList"
-        Me.orderList.Size = New System.Drawing.Size(223, 181)
-        Me.orderList.TabIndex = 4
-        Me.orderList.UseCompatibleStateImageBehavior = False
-        Me.orderList.View = System.Windows.Forms.View.Details
+        Me.orderListView.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
+        Me.orderListView.Location = New System.Drawing.Point(332, 58)
+        Me.orderListView.Name = "orderListView"
+        Me.orderListView.Size = New System.Drawing.Size(223, 181)
+        Me.orderListView.TabIndex = 4
+        Me.orderListView.UseCompatibleStateImageBehavior = False
+        Me.orderListView.View = System.Windows.Forms.View.Details
         '
         'ColumnHeader1
         '
@@ -280,6 +288,7 @@ Partial Class MainForm
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.PictureBox2)
         Me.GroupBox2.Controls.Add(Me.totalLabel)
         Me.GroupBox2.Controls.Add(Me.discountLabel)
         Me.GroupBox2.Controls.Add(Me.taxLabel)
@@ -290,7 +299,7 @@ Partial Class MainForm
         Me.GroupBox2.Controls.Add(Me.Label4)
         Me.GroupBox2.Location = New System.Drawing.Point(345, 247)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(200, 158)
+        Me.GroupBox2.Size = New System.Drawing.Size(200, 216)
         Me.GroupBox2.TabIndex = 9
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Total Sale"
@@ -338,7 +347,7 @@ Partial Class MainForm
         'testLabel
         '
         Me.testLabel.AutoSize = True
-        Me.testLabel.Location = New System.Drawing.Point(275, 517)
+        Me.testLabel.Location = New System.Drawing.Point(275, 557)
         Me.testLabel.Margin = New System.Windows.Forms.Padding(1, 0, 1, 0)
         Me.testLabel.Name = "testLabel"
         Me.testLabel.Size = New System.Drawing.Size(27, 13)
@@ -357,17 +366,56 @@ Partial Class MainForm
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(247, 484)
+        Me.Label7.Location = New System.Drawing.Point(247, 524)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(78, 13)
         Me.Label7.TabIndex = 13
         Me.Label7.Text = "Debug Section"
         '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.fileMenu})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(588, 24)
+        Me.MenuStrip1.TabIndex = 14
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'fileMenu
+        '
+        Me.fileMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExitToolStripMenuItem})
+        Me.fileMenu.Name = "fileMenu"
+        Me.fileMenu.Size = New System.Drawing.Size(37, 20)
+        Me.fileMenu.Text = "&File"
+        '
+        'ExitToolStripMenuItem
+        '
+        Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ExitToolStripMenuItem.Text = "&Exit"
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Location = New System.Drawing.Point(38, 334)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(121, 122)
+        Me.PictureBox1.TabIndex = 15
+        Me.PictureBox1.TabStop = False
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Location = New System.Drawing.Point(52, 160)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(100, 50)
+        Me.PictureBox2.TabIndex = 8
+        Me.PictureBox2.TabStop = False
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(588, 420)
+        Me.ClientSize = New System.Drawing.Size(588, 488)
+        Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.totalButton)
         Me.Controls.Add(Me.testLabel)
@@ -379,16 +427,22 @@ Partial Class MainForm
         Me.Controls.Add(Me.removeButton)
         Me.Controls.Add(Me.addButton)
         Me.Controls.Add(Me.deleteItemButton)
-        Me.Controls.Add(Me.orderList)
-        Me.Controls.Add(Me.availableList)
+        Me.Controls.Add(Me.orderListView)
+        Me.Controls.Add(Me.availableListView)
         Me.Controls.Add(Me.addItemButton)
         Me.Controls.Add(Me.exitButton)
+        Me.Controls.Add(Me.MenuStrip1)
+        Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "MainForm"
         Me.Text = "POS"
         Me.discountsGroupBox.ResumeLayout(False)
         Me.discountsGroupBox.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -396,13 +450,13 @@ Partial Class MainForm
 
     Friend WithEvents exitButton As Button
     Friend WithEvents addItemButton As Button
-    Friend WithEvents availableList As ListView
+    Friend WithEvents availableListView As ListView
     Friend WithEvents itemCHeader As ColumnHeader
     Friend WithEvents priceCHeader As ColumnHeader
     Friend WithEvents deleteItemButton As Button
     Friend WithEvents addButton As Button
     Friend WithEvents removeButton As Button
-    Friend WithEvents orderList As ListView
+    Friend WithEvents orderListView As ListView
     Friend WithEvents ColumnHeader1 As ColumnHeader
     Friend WithEvents ColumnHeader2 As ColumnHeader
     Friend WithEvents Label1 As Label
@@ -426,4 +480,9 @@ Partial Class MainForm
     Friend WithEvents otherDiscountTextBox As TextBox
     Friend WithEvents totalButton As Button
     Friend WithEvents Label7 As Label
+    Friend WithEvents MenuStrip1 As MenuStrip
+    Friend WithEvents fileMenu As ToolStripMenuItem
+    Friend WithEvents ExitToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents PictureBox1 As PictureBox
 End Class

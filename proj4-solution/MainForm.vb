@@ -134,7 +134,7 @@ Public Class MainForm
                 MessageBoxIcon.Exclamation,
                 MessageBoxDefaultButton.Button1)
             Else
-                Double.TryParse(InputBox(priceMessage, priceTitle, "$0.00"), userItem.price)
+                Double.TryParse(price, userItem.price)
 
                 availableListView.Items(0).Text = userItem.name
                 availableListView.Items(0).SubItems(1).Text = userItem.price.ToString("C02")

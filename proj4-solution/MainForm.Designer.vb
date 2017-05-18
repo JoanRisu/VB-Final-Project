@@ -57,13 +57,13 @@ Partial Class MainForm
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.fileMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.logoPictureBox = New System.Windows.Forms.PictureBox()
+        Me.dollarPictureBox = New System.Windows.Forms.PictureBox()
         Me.discountsGroupBox.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.logoPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dollarPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'exitButton
@@ -288,7 +288,7 @@ Partial Class MainForm
         '
         'GroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.PictureBox2)
+        Me.GroupBox2.Controls.Add(Me.dollarPictureBox)
         Me.GroupBox2.Controls.Add(Me.totalLabel)
         Me.GroupBox2.Controls.Add(Me.discountLabel)
         Me.GroupBox2.Controls.Add(Me.taxLabel)
@@ -321,7 +321,7 @@ Partial Class MainForm
         Me.discountLabel.Name = "discountLabel"
         Me.discountLabel.Size = New System.Drawing.Size(100, 23)
         Me.discountLabel.TabIndex = 7
-        Me.discountLabel.Text = "$0.00"
+        Me.discountLabel.Text = "-$0.00"
         Me.discountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'taxLabel
@@ -391,31 +391,36 @@ Partial Class MainForm
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(92, 22)
         Me.ExitToolStripMenuItem.Text = "&Exit"
         '
-        'PictureBox1
+        'logoPictureBox
         '
-        Me.PictureBox1.Location = New System.Drawing.Point(38, 334)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(121, 122)
-        Me.PictureBox1.TabIndex = 15
-        Me.PictureBox1.TabStop = False
+        Me.logoPictureBox.Image = Global.proj4_solution.My.Resources.Resources.my
+        Me.logoPictureBox.Location = New System.Drawing.Point(34, 339)
+        Me.logoPictureBox.Name = "logoPictureBox"
+        Me.logoPictureBox.Size = New System.Drawing.Size(121, 122)
+        Me.logoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.logoPictureBox.TabIndex = 15
+        Me.logoPictureBox.TabStop = False
         '
-        'PictureBox2
+        'dollarPictureBox
         '
-        Me.PictureBox2.Location = New System.Drawing.Point(52, 160)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(100, 50)
-        Me.PictureBox2.TabIndex = 8
-        Me.PictureBox2.TabStop = False
+        Me.dollarPictureBox.Image = Global.proj4_solution.My.Resources.Resources.dollar_sign_PNG21539
+        Me.dollarPictureBox.Location = New System.Drawing.Point(52, 160)
+        Me.dollarPictureBox.Name = "dollarPictureBox"
+        Me.dollarPictureBox.Size = New System.Drawing.Size(100, 50)
+        Me.dollarPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.dollarPictureBox.TabIndex = 8
+        Me.dollarPictureBox.TabStop = False
+        Me.dollarPictureBox.Visible = False
         '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(588, 488)
-        Me.Controls.Add(Me.PictureBox1)
+        Me.Controls.Add(Me.logoPictureBox)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.totalButton)
         Me.Controls.Add(Me.testLabel)
@@ -441,8 +446,8 @@ Partial Class MainForm
         Me.GroupBox2.PerformLayout()
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.logoPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dollarPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -483,6 +488,6 @@ Partial Class MainForm
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents fileMenu As ToolStripMenuItem
     Friend WithEvents ExitToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents PictureBox2 As PictureBox
-    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents dollarPictureBox As PictureBox
+    Friend WithEvents logoPictureBox As PictureBox
 End Class

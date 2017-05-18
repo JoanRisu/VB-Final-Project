@@ -22,5 +22,15 @@ proj4-solution
   resource lookups using this strongly typed resource class.
 </summary>
 </member>
+<member name="P:proj4_solution.My.Resources.Resources.dollar_sign_PNG21539">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:proj4_solution.My.Resources.Resources.my">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
 </members>
 </doc>
